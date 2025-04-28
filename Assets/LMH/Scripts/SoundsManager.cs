@@ -23,21 +23,12 @@ public class SoundsManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             //SceneManager.sceneLoaded += OnSceneLoaded;
             backGroundMusicPlay(bgmlist[0]);
+            
         }
         else
         {
             Destroy(gameObject);
         }
-    }
-
-    private void Start()
-    {
-        
-    }
-
-    private void OnEnable()
-    {
-        
     }
     // 기본적으로 출력하는 배경음악
     public void backGroundMusicPlay(AudioClip cilp)
@@ -48,6 +39,18 @@ public class SoundsManager : MonoBehaviour
         bgm.volume = 0.5f;
         bgm.Play();
     }
+
+    public void SFXPlay(string sfxName, AudioClip clip)
+    {
+        GameObject go = new GameObject(sfxName + "Sound");
+        AudioSource audioSource = go.AddComponent<AudioSource>();
+        audioSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups("SFX")[0];
+        audioSource.clip = clip;
+        audioSource.Play();
+        Destroy(go, clip.length);
+
+    }
+
     // 씬에 의해 변경되는 배경음악
     /*private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
@@ -61,5 +64,11 @@ public class SoundsManager : MonoBehaviour
     public void BGMController(float value)
     {
         audioMixer.SetFloat("BGMParam", Mathf.Log10(value) * 20);
+    }
+
+    // UI와 연결되는 효과음 컨트롤러
+    public void SFXController(float value)
+    {
+        audioMixer.SetFloat("SFXParam", Mathf.Log10(value) * 20);
     }
 }

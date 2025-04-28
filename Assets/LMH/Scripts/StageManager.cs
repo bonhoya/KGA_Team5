@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static StageManager Instance;
 
-    // Update is called once per frame
-    void Update()
+    private bool isCleared;
+    
+    // 플레이어의 스테이지당 체력은 20
+    
+    private int playerHP;
+    [SerializeField] private int gold;
+    private Time stageTime;
+
+
+    private void OnEnable()
     {
-        
+        isCleared = false;
+        playerHP = 20;
     }
 }

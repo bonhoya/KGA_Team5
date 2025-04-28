@@ -686,7 +686,7 @@ MonoBehaviour:
   detectRadius: 2
   target:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   clip: {fileID: 8300000, guid: 27e9fa56e7238c746bcb65e37ba390a2, type: 3}
 --- !u!136 &454837839
 CapsuleCollider:

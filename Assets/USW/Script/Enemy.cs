@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System;
+using System.Collections.Generic;
 
 /// <summary>
-/// Enemy 클래스: 적 유닛의 행동과 풀링, 네비메시 이동을 담당
+/// Enemy 클래스: 적 유닛의 행동과 풀링, 네비메시 이동, 적 상태 담당;
 /// </summary>
 public class Enemy : MonoBehaviour
 {
@@ -20,9 +21,14 @@ public class Enemy : MonoBehaviour
     public Transform spawnPoint;
 
     /// <summary>
-    /// 적의 체력
+    /// 적 상태창
     /// </summary>
-    public float health = 100f;
+    public float maxHealth = 0f;
+    public float currentHealth;
+    public float attackPower = 0f;
+    public float defense = 0f;
+    public float magicPower = 0f;
+    public float magicResistance = 0f;
 
     /// <summary>
     /// 네비
@@ -33,6 +39,12 @@ public class Enemy : MonoBehaviour
     /// 적이 죽을 때 풀로 반환하는 이벤트 (풀링 시스템에서 사용)
     /// </summary>
     public event Action<GameObject> onDeath;
+
+    /// <summary>
+    /// 웨이포인트 경로
+    /// </summary>
+    private List<Transform> wayPoints; // 웨이포인트 경로
+    private int currentWayPointIndex; // 현재 목표 웨이포인트 인덱스
 
     // ---------------[초기화]----------------
 
@@ -51,12 +63,16 @@ public class Enemy : MonoBehaviour
     /// </summary>
     /// <param name="spawn">스폰 위치</param>
     /// <param name="end">목표 위치</param>
-    public void Initialize(Transform spawn, Transform end)
+    public void Initialize(Transform spawn, Transform end,List<Transform> wayPointList)
     {
         spawnPoint = spawn;   // 스폰 위치 저장
         endPoint = end;       // 목표 위치 저장
-        health = 100f;        // 체력 리셋
+        
 
+        //웨이포인트 경로 저장
+        wayPoints = wayPointList;
+        currentWayPointIndex = 0;
+        
         // NavMeshAgent 재설정 (풀링 때문에 필수)
         agent.enabled = false;                        // NavMeshAgent 비활성화
         transform.position = spawnPoint.position;     // 위치 이동
@@ -71,6 +87,17 @@ public class Enemy : MonoBehaviour
         {
             gameObject.SetActive(false);              // 적 오브젝트 비활성화(풀로 반환)
         }
+        
+        // 첫번째 웨이포인트로 이동 시작 
+
+        if (wayPoints != null && wayPoints.Count > 0)
+        {
+            agent.SetDestination(wayPoints[0].position);
+        }
+        else
+        {
+            agent.SetDestination(endPoint.position);
+        }
     }
 
     // ---------------[게임 루프]----------------
@@ -80,26 +107,62 @@ public class Enemy : MonoBehaviour
     /// </summary>
     void Update()
     {
-        // NavMeshAgent가 활성화되어 있고, 경로 계산 중이 아니며, 목표 지점에 거의 도달했다면
-        if (agent.enabled && !agent.pathPending && agent.remainingDistance < 0.5f)
+        if (agent.enabled && !agent.pathPending)
         {
-            TakeDamage(1f); 
+            if (wayPoints != null && currentWayPointIndex < wayPoints.Count)
+            {
+                // 현재 웨이포인트에 거의 도달하면 다음 웨이포인트로
+                if (agent.remainingDistance < 0.5f)
+                {
+                    currentWayPointIndex++;
+                    if (currentWayPointIndex < wayPoints.Count)
+                    {
+                        agent.SetDestination(wayPoints[currentWayPointIndex].position);
+                    }
+                    else
+                    {
+                        // 웨이포인트 끝나면 최종 목적지로 이동
+                        agent.SetDestination(endPoint.position);
+                    }
+                }
+            }
+            else
+            {
+                // 최종 목적지 도달 체크
+                if (agent.remainingDistance < 0.5f)
+                {
+                    GameManager.Instance.PlayerTakeDamage(1);
+                    Die();
+                }
+            }
         }
     }
+
 
     // ---------------[전투/풀링 시스템]----------------
 
     /// <summary>
     /// 데미지를 입는 함수
     /// </summary>
-    /// <param name="damage">입는 데미지 양</param>
-    void TakeDamage(float damage)
+
+    public virtual void InitializeStats()
     {
-        health -= damage;         // 체력 감소
-        if (health <= 0)
-        {
-            Die();                // 체력이 0 이하가 되면 사망 처리
-        }
+        currentHealth = maxHealth;
+    }
+
+    public virtual void TakePhysicalDamage(float damage)
+    {
+        //물리 방어력이 있다면 여기에서 계산침 
+        currentHealth -= Mathf.Max(0, damage);
+        if (currentHealth <= 0) Die();
+    }
+
+    public virtual void TakeMagicDamage(float magicDamage)
+    {
+        // magicResistance 가 0.1면 10%감소
+        float reduced = magicDamage * (1f - magicResistance);
+        currentHealth -= Mathf.Max(0, magicDamage - reduced);
+        if (currentHealth <= 0) Die();
     }
 
     /// <summary>

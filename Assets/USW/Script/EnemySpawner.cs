@@ -33,6 +33,10 @@ public class EnemySpawner : MonoBehaviour
     [Header("타이밍 설정")]
     public float startDelay = 2f;         // 게임 시작 후 첫 웨이브까지 대기 시간
 
+    [Header("웨이포인트 경로")]
+    public List<Transform> wayPoints;     // 웨이포인트 설정.
+    
+    
     private Dictionary<GameObject, List<GameObject>> enemyPools; // 프리팹별 오브젝트 풀
     private int currentWaveIndex = 0;     // 현재 웨이브 인덱스
     private bool isSpawning = false;      // 웨이브 진행 중 여부
@@ -127,7 +131,7 @@ public class EnemySpawner : MonoBehaviour
                 Enemy enemyScript = enemy.GetComponent<Enemy>();
                 if (enemyScript != null)
                 {
-                    enemyScript.Initialize(spawnPoint, endPoint); // 위치/목표 초기화
+                    enemyScript.Initialize(spawnPoint, endPoint,wayPoints); // 위치/목표 초기화
                 }
                 return enemy;
             }

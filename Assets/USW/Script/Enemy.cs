@@ -29,11 +29,12 @@ public class Enemy : MonoBehaviour
     public float defense = 0f;
     public float magicPower = 0f;
     public float magicResistance = 0f;
-
+    public float moveSpeed = 0f;
+    public Vector3 offset;
     /// <summary>
     /// 네비
     /// </summary>
-    private NavMeshAgent agent;
+    [SerializeField] protected NavMeshAgent agent;
 
     /// <summary>
     /// 적이 죽을 때 풀로 반환하는 이벤트 (풀링 시스템에서 사용)
@@ -43,8 +44,8 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// 웨이포인트 경로
     /// </summary>
-    private List<Transform> wayPoints; // 웨이포인트 경로
-    private int currentWayPointIndex; // 현재 목표 웨이포인트 인덱스
+    protected List<Transform> wayPoints; // 웨이포인트 경로
+    protected int currentWayPointIndex; // 현재 목표 웨이포인트 인덱스
 
     // ---------------[초기화]----------------
 
@@ -57,17 +58,17 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>(); 
     }
 
-
+    #region EnemySpawner 용 초기화 함수
+    
     /// <summary>
     /// 적을 스폰할 때마다 호출되는 초기화 함수
     /// </summary>
     /// <param name="spawn">스폰 위치</param>
     /// <param name="end">목표 위치</param>
-    public void Initialize(Transform spawn, Transform end,List<Transform> wayPointList)
+    public virtual void Initialize(Transform spawn, Transform end,List<Transform> wayPointList)
     {
         spawnPoint = spawn;   // 스폰 위치 저장
         endPoint = end;       // 목표 위치 저장
-        
 
         //웨이포인트 경로 저장
         wayPoints = wayPointList;
@@ -98,14 +99,56 @@ public class Enemy : MonoBehaviour
         {
             agent.SetDestination(endPoint.position);
         }
+        
+        InitializeStats();
     }
+#endregion
 
+
+#region 네크로멘서용 Initialize
+
+public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> wayPointList)
+{
+    endPoint = end;
+    wayPoints = wayPointList;
+    currentWayPointIndex = 0;
+
+    agent.enabled = false;
+    transform.position = spawnPos;
+    agent.enabled = true;
+    
+    
+    
+    // NavMesh 위에 제대로 올라갔는지 체크
+    if (agent.isOnNavMesh)
+    {
+        agent.SetDestination(endPoint.position);  // 목적지 설정 (이동 시작)
+    }
+    else
+    {
+        gameObject.SetActive(false);              // 적 오브젝트 비활성화(풀로 반환)
+    }
+        
+    // 첫번째 웨이포인트로 이동 시작 
+
+    if (wayPoints != null && wayPoints.Count > 0)
+    {
+        agent.SetDestination(wayPoints[0].position+offset);
+    }
+    else
+    {
+        agent.SetDestination(endPoint.position);
+    }
+    InitializeStats();
+}
+
+#endregion
     // ---------------[게임 루프]----------------
 
     /// <summary>
     /// 매 프레임마다 호출 (적의 상태 체크)
     /// </summary>
-    void Update()
+    protected virtual void Update()
     {
         if (agent.enabled && !agent.pathPending)
         {
@@ -150,25 +193,25 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public virtual void TakePhysicalDamage(float damage)
+    public virtual void TakePhysicalDamage(float attackerAttack)
     {
-        //물리 방어력이 있다면 여기에서 계산침 
-        currentHealth -= Mathf.Max(0, damage);
+        float damage = GameManager.Instance.CalculatePhysicalDamage(attackerAttack, this.defense);
+        currentHealth -= damage;
         if (currentHealth <= 0) Die();
     }
 
-    public virtual void TakeMagicDamage(float magicDamage)
+    public virtual void TakeMagicDamage(float attackerMagic)
     {
-        // magicResistance 가 0.1면 10%감소
-        float reduced = magicDamage * (1f - magicResistance);
-        currentHealth -= Mathf.Max(0, magicDamage - reduced);
+        float damage = GameManager.Instance.CalculateMagicDamage(attackerMagic, this.magicResistance);
+        currentHealth -= damage;
         if (currentHealth <= 0) Die();
     }
+
 
     /// <summary>
     /// 적이 죽었을 때 호출 (풀로 반환)
     /// </summary>
-    void Die()
+    protected virtual void Die()
     {
         // NavMeshAgent 비활성화
         agent.enabled = false;

@@ -10,6 +10,7 @@ public class CameraController : MonoBehaviour
 
     public GameObject UI;//화면상단 ui전부
 
+    
     public void StartCameraMove()
     {
         StartCoroutine(CameraMoveCoroutine());

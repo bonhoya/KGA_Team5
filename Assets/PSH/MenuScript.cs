@@ -20,7 +20,7 @@ public class MenuScript : MonoBehaviour
 
     public void QuitClick()
     {
-        //게임 꺼지는 코드
+        Application.Quit();
     }
 
     public void UndoClick()

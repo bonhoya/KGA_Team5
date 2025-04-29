@@ -107,4 +107,10 @@ public class ArcherTower : MonoBehaviour, ITower
         attackSpeed *= 0.9f;
         arrowDelay = new WaitForSeconds(attackRate / attackSpeed);
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectRadius);
+    }
 }

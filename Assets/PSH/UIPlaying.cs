@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIPlaying : MonoBehaviour
@@ -31,25 +33,36 @@ public class UIPlaying : MonoBehaviour
     private int gold = 100;
 
     private float timer = 0f;
-    private int gamePause = 1;
+    private int gamePause = 1;//이거 지워야할듯
     private int currentWave = 0;
 
     private void OnEnable()
     {
         CameraController.OnCameraMoveDone += StartGame;
+        StartCoroutine(DelayStartCamera());
     }
     private void StartGame()
     {
         isGameStarted = true;
-        PopupStageInfo.SetActive(false);
+        if (PopupStageInfo != null)
+            PopupStageInfo.SetActive(false);
     }
+    private IEnumerator DelayStartCamera()
+    {
+        yield return new WaitForSeconds(.1f);
+        FindObjectOfType<CameraController>().StartCameraMove();
+    }
+
     private void Start()
     {
         PopupPause.SetActive(false);
         PopupLose.SetActive(false);
         PopupWin.SetActive(false);
 
+        Time.timeScale = 1;
+
         UpdateUI();
+
 
         //웨이브 관련 정보 가져오기
 
@@ -76,7 +89,7 @@ public class UIPlaying : MonoBehaviour
         //적이 다 죽어서 웨이브 끝나면 isWave = false;
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         healthText.text = health.ToString();
         goldText.text = gold.ToString();
@@ -86,9 +99,9 @@ public class UIPlaying : MonoBehaviour
     {
         WaveBtn.gameObject.SetActive(true);
         //웨이브가 이방향으로 옵니다 표시
-        waveLine.DrawPath(1);
-        //표시할것들은 currentWave와 관련되게 배열쓰면 될듯
-        
+        waveLine.DrawPath(1, 1);//몇스테이지 몇번째웨이브라는뜻
+                                //표시할것들은 currentWave와 관련되게 배열쓰면 될듯
+
     }
 
     public void WaveStartClick()
@@ -105,6 +118,7 @@ public class UIPlaying : MonoBehaviour
         {
             //게임멈추고 게임클리어 이미지를 열어
             gamePause = 0;
+            Time.timeScale = 0;
             PopupWin.SetActive(true);
             isOver = true;
         }
@@ -113,6 +127,7 @@ public class UIPlaying : MonoBehaviour
         {
             //게임멈추고 게임오버 이미지를 열어
             gamePause = 0;
+            Time.timeScale = 0;
             PopupLose.SetActive(true);
             isOver = true;
         }
@@ -159,12 +174,14 @@ public class UIPlaying : MonoBehaviour
 
     public void RestartClick()
     {
-        //재시작버튼누르면어쩌고
+        isGameStarted = false;
+        CameraController.OnCameraMoveDone -= StartGame;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void QuitClick()
     {
-        //끝버튼누르면어쩌고
+        SceneManager.LoadScene("Menu");
     }
 
     public void NextClick()

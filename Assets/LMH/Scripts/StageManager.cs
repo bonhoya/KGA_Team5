@@ -8,7 +8,7 @@ public class StageManager : MonoBehaviour
 
     private bool isCleared;
     
-    // ÇÃ·¹ÀÌ¾îÀÇ ½ºÅ×ÀÌÁö´ç Ã¼·ÂÀº 20
+    // í”Œë ˆì´ì–´ì˜ ìŠ¤í…Œì´ì§€ë‹¹ ì²´ë ¥ì€ 20
     
     private int playerHP;
     [SerializeField] private int gold;

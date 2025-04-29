@@ -130,7 +130,7 @@ public class ArcherTower : MonoBehaviour, ITower
     }
     public void AttackEnemy(Enemy enemy)
     {
-        float damage = GameManger.Instance.CalculatePhysicalDamage(attackPower, enemy.defense);
+        float damage = GameManager.Instance.CalculatePhysicalDamage(attackPower, enemy.defense);
 
         enemy.TakePhysicalDamage(damage);
     }

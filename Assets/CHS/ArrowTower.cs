@@ -24,6 +24,8 @@ public class ArcherTower : MonoBehaviour, ITower
     private Coroutine arrowCoroutine;
     private YieldInstruction arrowDelay;
 
+    [SerializeField] private Transform targetPos;
+
     private string arrowType;
 
     [SerializeField] private float damage;
@@ -63,6 +65,8 @@ public class ArcherTower : MonoBehaviour, ITower
     {
         if (Physics.OverlapSphere(transform.position, range, enemyLayer).Length > 0)
         {
+            Vector3 lookPos = new Vector3(targetPos.position.x, transform.position.y, targetPos.position.z);
+            transform.LookAt(lookPos);
             if (arrowCoroutine == null)
             {
                 Attack();

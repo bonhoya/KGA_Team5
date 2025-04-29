@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
@@ -13,14 +14,12 @@ public class ArcherTower : MonoBehaviour, ITower
 
     [SerializeField] private float attackRate;
 
-    [SerializeField] private float detectRadius;
-
     [SerializeField] private Animator animator;
 
     [SerializeField] private LayerMask enemyLayer;
 
     [SerializeField] private int poolSize;
-    private Stack<GameObject> arrowPool;
+    public Stack<GameObject> arrowPool;
 
     private Coroutine arrowCoroutine;
     private YieldInstruction arrowDelay;
@@ -55,13 +54,14 @@ public class ArcherTower : MonoBehaviour, ITower
         }
     }
 
+
     private void Update()
     {
         findEnemy();
     }
     private void findEnemy()
     {
-        if (Physics.OverlapSphere(transform.position, detectRadius, enemyLayer).Length > 0)
+        if (Physics.OverlapSphere(transform.position, range, enemyLayer).Length > 0)
         {
             if (arrowCoroutine == null)
             {
@@ -82,9 +82,10 @@ public class ArcherTower : MonoBehaviour, ITower
     {
         if (arrowCoroutine == null)
         {
-            StartCoroutine(AttackCoroutine());
+            arrowCoroutine = StartCoroutine(AttackCoroutine());
         }
     }
+
     private IEnumerator AttackCoroutine()
     {
         while (true)
@@ -111,6 +112,6 @@ public class ArcherTower : MonoBehaviour, ITower
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectRadius);
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

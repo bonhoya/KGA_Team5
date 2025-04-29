@@ -33,8 +33,8 @@ public class ArcherTower : MonoBehaviour, ITower
     [SerializeField] private float damage;
     [SerializeField] private float range;       // 사거리
     [SerializeField] private float attackSpeed;
-    
 
+    
     public float Damage => damage;
     public float Range => range;
     public float AttackSpeed => attackSpeed;
@@ -94,7 +94,7 @@ public class ArcherTower : MonoBehaviour, ITower
 
         foreach (var hit in hits)
         {
-            if (hit.gameObject.layer == 6 && hit.gameObject.activeInHierarchy)
+            if (hit.gameObject.layer == 6 && hit.gameObject.activeInHierarchy)      // 태그 사용 시 other.CompareTag("Enemy")
             {
                 currentTarget = hit.transform;
                 break;
@@ -128,6 +128,7 @@ public class ArcherTower : MonoBehaviour, ITower
             arrowCoroutine = StartCoroutine(AttackCoroutine());
         }
     }
+    
 
     private IEnumerator AttackCoroutine()
     {

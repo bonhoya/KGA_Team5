@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
-public enum WeaponState { SearchTarget, AttackToTarget }
+public enum WeaponState { SearchTarget, AttackToTarget }        // 적을 발견하고 쏜다
 public class ArcherTower : MonoBehaviour, ITower
 {
 
@@ -26,10 +26,12 @@ public class ArcherTower : MonoBehaviour, ITower
 
     [SerializeField] private Transform targetPos;
 
-    private string arrowType;
+    private string arrowType;       // 나중에 추가할 속성? 능력?
+
+    [SerializeField] private Transform currentTarget;     // 현재 타겟 저장
 
     [SerializeField] private float damage;
-    [SerializeField] private float range;
+    [SerializeField] private float range;       // 사거리
     [SerializeField] private float attackSpeed;
     
 
@@ -61,12 +63,49 @@ public class ArcherTower : MonoBehaviour, ITower
     {
         findEnemy();
     }
+
     private void findEnemy()
     {
-        if (Physics.OverlapSphere(transform.position, range, enemyLayer).Length > 0)
+        if (currentTarget != null && currentTarget.gameObject.activeInHierarchy)
         {
-            Vector3 lookPos = new Vector3(targetPos.position.x, transform.position.y, targetPos.position.z);
+            // 현재 타겟이 여전히 사거리 안에 있는지 확인
+            float distance = Vector3.Distance(transform.position, currentTarget.position);
+            if (distance <= range)
+            {
+                Vector3 lookPos = new Vector3(currentTarget.position.x, transform.position.y, currentTarget.position.z);
+                transform.LookAt(lookPos);
+
+                if (arrowCoroutine == null)
+                {
+                    Attack();
+                }
+
+                return; // 현재 타겟 유지 중이므로 새 타겟 찾지 않음
+            }
+            else
+            {
+                // 타겟 사거리 벗어남
+                currentTarget = null;
+            }
+        }
+
+        // 새 타겟 찾기 (레이어 6번만)
+        Collider[] hits = Physics.OverlapSphere(transform.position, range, enemyLayer);
+
+        foreach (var hit in hits)
+        {
+            if (hit.gameObject.layer == 6 && hit.gameObject.activeInHierarchy)
+            {
+                currentTarget = hit.transform;
+                break;
+            }
+        }
+
+        if (currentTarget != null)
+        {
+            Vector3 lookPos = new Vector3(currentTarget.position.x, transform.position.y, currentTarget.position.z);
             transform.LookAt(lookPos);
+
             if (arrowCoroutine == null)
             {
                 Attack();
@@ -74,13 +113,13 @@ public class ArcherTower : MonoBehaviour, ITower
         }
         else
         {
+            // 타겟 없음
             if (arrowCoroutine != null)
             {
                 StopCoroutine(arrowCoroutine);
                 arrowCoroutine = null;
             }
         }
-
     }
     public void Attack()
     {

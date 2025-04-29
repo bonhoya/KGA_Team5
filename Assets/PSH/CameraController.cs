@@ -9,14 +9,10 @@ public class CameraController : MonoBehaviour
     public RectTransform uiRect;
 
     public GameObject UI;//화면상단 ui전부
-    private void Start()
-    {
-        StartCameraMove();//ui도 여기에 넣자
-    }
+
     public void StartCameraMove()
     {
         StartCoroutine(CameraMoveCoroutine());
-
     }
 
     private IEnumerator CameraMoveCoroutine()

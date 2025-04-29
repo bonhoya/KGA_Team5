@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIPlaying : MonoBehaviour
@@ -36,20 +38,30 @@ public class UIPlaying : MonoBehaviour
 
     private void OnEnable()
     {
-        CameraController.OnCameraMoveDone += StartGame;
+        CameraController.OnCameraMoveDone += StartGame;       
+        StartCoroutine(DelayStartCamera());
     }
     private void StartGame()
     {
         isGameStarted = true;
         PopupStageInfo.SetActive(false);
     }
+    private IEnumerator DelayStartCamera()
+    {
+        yield return new WaitForSeconds(.1f);
+        FindObjectOfType<CameraController>().StartCameraMove();
+    }
+
     private void Start()
     {
         PopupPause.SetActive(false);
         PopupLose.SetActive(false);
         PopupWin.SetActive(false);
 
+        Time.timeScale = 1;
+
         UpdateUI();
+
 
         //웨이브 관련 정보 가져오기
 
@@ -86,7 +98,7 @@ public class UIPlaying : MonoBehaviour
     {
         WaveBtn.gameObject.SetActive(true);
         //웨이브가 이방향으로 옵니다 표시
-        waveLine.DrawPath(1);
+        waveLine.DrawPath(1,1);//몇스테이지 몇번째웨이브라는뜻
         //표시할것들은 currentWave와 관련되게 배열쓰면 될듯
         
     }
@@ -159,12 +171,13 @@ public class UIPlaying : MonoBehaviour
 
     public void RestartClick()
     {
-        //재시작버튼누르면어쩌고
+        CameraController.OnCameraMoveDone -= StartGame;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void QuitClick()
     {
-        //끝버튼누르면어쩌고
+        SceneManager.LoadScene("Menu");
     }
 
     public void NextClick()

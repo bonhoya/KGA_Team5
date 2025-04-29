@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
@@ -30,6 +31,17 @@ public class MenuScript : MonoBehaviour
 
     public void StageClick(int n)
     {
-        //n에 따라 스테이지 씬 전환 다르게 코드
+        switch (n)
+        {
+            case 1:
+                SceneManager.LoadScene("Map2");
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        default:
+                break;
+        }
     }
 }

@@ -30,12 +30,12 @@ public class ArcherTower : MonoBehaviour, ITower
 
     [SerializeField] private Transform currentTarget;     // 현재 타겟 저장
 
-    [SerializeField] private float damage;
+    [SerializeField] private float attackPower;
     [SerializeField] private float range;       // 사거리
     [SerializeField] private float attackSpeed;
 
     
-    public float Damage => damage;
+    public float Damage => attackPower;
     public float Range => range;
     public float AttackSpeed => attackSpeed;
 
@@ -128,7 +128,12 @@ public class ArcherTower : MonoBehaviour, ITower
             arrowCoroutine = StartCoroutine(AttackCoroutine());
         }
     }
-    
+    public void AttackEnemy(Enemy enemy)
+    {
+        float damage = GameManger.Instance.CalculatePhysicalDamage(attackPower, enemy.defense);
+
+        enemy.TakePhysicalDamage(damage);
+    }
 
     private IEnumerator AttackCoroutine()
     {
@@ -146,9 +151,14 @@ public class ArcherTower : MonoBehaviour, ITower
         }
     }
 
+    public void CriticalShot()
+    {
+
+    }
+    
     public void Upgrade()
     {
-        damage += 5f;
+        attackPower += 5f;
         attackSpeed *= 0.9f;
         arrowDelay = new WaitForSeconds(attackRate / attackSpeed);
     }

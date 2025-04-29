@@ -32,7 +32,7 @@ public class Arrow : MonoBehaviour
     {
         if (other.gameObject.layer == 6)
         {
-            enemyHealth -= arrowPower;
+            
             StartCoroutine(ReturnPool());
         }
     }

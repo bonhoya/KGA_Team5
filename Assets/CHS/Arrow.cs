@@ -16,13 +16,24 @@ public class Arrow : MonoBehaviour
     private void OnEnable()
     {
         rigid.AddForce(transform.forward * arrowSpeed, ForceMode.Impulse);
+        StartCoroutine(ReturnPool(2f));
+    }
+
+    private IEnumerator ReturnPool(float delay = 0)
+    {
+        yield return new WaitForSeconds(delay);
+
+        rigid.velocity = Vector3.zero;
+        gameObject.SetActive(false);
+        returnPool.Push(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 6)
         {
-            enemyHealth -= arrowPower;
+            
+            StartCoroutine(ReturnPool());
         }
     }
 }

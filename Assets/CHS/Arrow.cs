@@ -8,6 +8,8 @@ public class Arrow : MonoBehaviour
     [SerializeField] private Rigidbody rigid;
 
     [SerializeField] private float arrowSpeed;
+    [SerializeField] private int enemyHealth;
+    [SerializeField] private int arrowPower;
 
     public Stack<GameObject> returnPool;
 

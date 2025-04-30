@@ -8,7 +8,7 @@ public class Ghost : Enemy
         maxHealth = 50f; 
         currentHealth = maxHealth; 
         defense = 1f; // 물리 방어력 100% 
-        magicResistance = 0.3f; // 마법 저항력 30% 
+        magicResistance = 0.1f; // 마법 저항력 10%
         moveSpeed = 6f; 
         
         // NavMeshAgent 속도 업데이트

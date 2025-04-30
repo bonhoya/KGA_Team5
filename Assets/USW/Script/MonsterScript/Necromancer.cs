@@ -13,7 +13,7 @@ public class Necromancer : Enemy
     public override void InitializeStats()
     {
         maxHealth = 80f;
-        moveSpeed = 3.5f;
+        moveSpeed = 4f;
         isAlive = true;
         base.InitializeStats();
         if (agent != null)
@@ -54,6 +54,8 @@ public class Necromancer : Enemy
                 Vector3 spawnPos = transform.position 
                                    + transform.right * offsetX
                                    + transform.forward * offsetZ;
+                
+                
                 
                 
                 // y축은 네크로멘서랑 맞추고

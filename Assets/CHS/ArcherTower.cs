@@ -1,100 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
-public enum WeaponState { SearchTarget, AttackToTarget }        // ÀûÀ» ¹ß°ßÇÏ°í ½ğ´Ù
-public class ArcherTower : MonoBehaviour, ITower
+// Towerì€ ê·¸ì € ë¶€ëª¨ë‹˜ì¼ë¿ ì¼ì€ ìì‹í´ë˜ìŠ¤ë“¤ì´ í• êº¼ì„
+public abstract class Tower : MonoBehaviour
 {
+    [Header("íƒ€ì›Œ ìŠ¤íƒ¯")] 
+    [SerializeField] protected float attackPower;
 
-    [SerializeField] private GameObject arrowPrefab;
-    [SerializeField] private Transform muzzlePos;
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] protected float range;
 
-    [SerializeField] private float attackRate;
+    [SerializeField] protected float attackSpeed;
 
-    [SerializeField] private Animator animator;
-
+    [Header(" ì  íƒì§€ ì„¤ì •")] 
+    
+    // ì  ë ˆì´ì–´ êµ¬ë³„ 
     [SerializeField] private LayerMask enemyLayer;
 
-    [SerializeField] private int poolSize;
-    public Stack<GameObject> arrowPool;
-
-    private Coroutine arrowCoroutine;
-    private YieldInstruction arrowDelay;
-
-    [SerializeField] private Transform targetPos;
-
-    private string arrowType;       // ³ªÁß¿¡ Ãß°¡ÇÒ ¼Ó¼º? ´É·Â?
-
-    [SerializeField] private Transform currentTarget;     // ÇöÀç Å¸°Ù ÀúÀå
-
-    [SerializeField] private float attackPower;
-    [SerializeField] private float range;       // »ç°Å¸®
-    [SerializeField] private float attackSpeed;
-
+    
+    // í˜„ì¬ íƒ€ê²Ÿ : íƒ€ì›Œê°€ í˜„ì¬ ê³µê²©í•˜ê³  ìˆëŠ” íƒ€ê²Ÿ
+    [SerializeField] protected Transform currentTarget;
     
     public float Damage => attackPower;
     public float Range => range;
     public float AttackSpeed => attackSpeed;
 
-    private void Awake()
+    protected virtual void Update()
     {
-        arrowDelay = new WaitForSeconds(attackRate);
+        FindEnemy();
     }
 
-
-    private void Start()
-    {
-        arrowPool = new Stack<GameObject>();
-
-        for (int i = 0; i < poolSize; i++)
-        {
-            GameObject obj = Instantiate(arrowPrefab);
-            obj.GetComponent<Arrow>().returnPool = arrowPool;
-            obj.SetActive(false);
-            arrowPool.Push(obj);
-        }
-    }
-
-
-    private void Update()
-    {
-        findEnemy();
-    }
-
-    private void findEnemy()
+    protected virtual void FindEnemy()
     {
         if (currentTarget != null && currentTarget.gameObject.activeInHierarchy)
         {
-            // ÇöÀç Å¸°ÙÀÌ ¿©ÀüÈ÷ »ç°Å¸® ¾È¿¡ ÀÖ´ÂÁö È®ÀÎ
             float distance = Vector3.Distance(transform.position, currentTarget.position);
+
             if (distance <= range)
-            {
+            {   // ì ì„ ë°”ë¼ë³´ë„ë¡ íƒ€ì›Œ ë°©í–¥ì„ ì¡°ì •í•˜ê³  yì¶•ì€ ê±´ë“¤ì§€ë§ê²ƒ , ê±´ë“¤ë©´ ì–˜ ì‹¬í•˜ê²Œ í”ë“¤ì–´ ì¬ë‚Œ 
                 Vector3 lookPos = new Vector3(currentTarget.position.x, transform.position.y, currentTarget.position.z);
                 transform.LookAt(lookPos);
-
-                if (arrowCoroutine == null)
-                {
-                    Attack();
-                }
-
-                return; // ÇöÀç Å¸°Ù À¯Áö ÁßÀÌ¹Ç·Î »õ Å¸°Ù Ã£Áö ¾ÊÀ½
+                Attack();
+                
+                // ì´ë¯¸ íƒ€ê²Ÿìˆìœ¼ë‹ˆê¹ ë”ì´ìƒ ìƒˆë¡œìš´ ì  ì•ˆì°¾ìŒ.
+                return;
             }
             else
             {
-                // Å¸°Ù »ç°Å¸® ¹ş¾î³²
+                // íƒ€ê²Ÿì´ ë²”ìœ„ë¥¼ ë²—ì–´ë‚¬ìœ¼ë©´ íƒ€ê²Ÿì„ ì´ˆê¸°í™” 
                 currentTarget = null;
             }
         }
-
-        // »õ Å¸°Ù Ã£±â (·¹ÀÌ¾î 6¹ø¸¸)
-        Collider[] hits = Physics.OverlapSphere(transform.position, range, enemyLayer);
-
+        
+        // ìƒˆë¡œìš´ íƒ€ê²Ÿ ì°¾ê³  ì  ë ˆì´ì–´ í•´ë‹¹ë˜ê³  í™œì„±í™”ê°€ ëœ íƒ€ê²Ÿìœ¼ë¡œ ì„¤ì • 
+        Collider[] hits = Physics.OverlapSphere(transform.position, range,enemyLayer);
         foreach (var hit in hits)
         {
-            if (hit.gameObject.layer == 6 && hit.gameObject.activeInHierarchy)      // ÅÂ±× »ç¿ë ½Ã other.CompareTag("Enemy")
+            if (hit.gameObject.layer == 6 && hit.gameObject.activeInHierarchy)
             {
                 currentTarget = hit.transform;
                 break;
@@ -105,67 +67,16 @@ public class ArcherTower : MonoBehaviour, ITower
         {
             Vector3 lookPos = new Vector3(currentTarget.position.x, transform.position.y, currentTarget.position.z);
             transform.LookAt(lookPos);
-
-            if (arrowCoroutine == null)
-            {
-                Attack();
-            }
+            Attack();
         }
-        else
-        {
-            // Å¸°Ù ¾øÀ½
-            if (arrowCoroutine != null)
-            {
-                StopCoroutine(arrowCoroutine);
-                arrowCoroutine = null;
-            }
-        }
+        
+        
     }
-    public void Attack()
-    {
-        if (arrowCoroutine == null)
-        {
-            arrowCoroutine = StartCoroutine(AttackCoroutine());
-        }
-    }
-    public void AttackEnemy(Enemy enemy)
-    {
-        float damage = GameManager.Instance.CalculatePhysicalDamage(attackPower, enemy.defense);
+    // ê³µê²©ë¡œì§ì¸ë° ìì‹í´ë˜ìŠ¤ì—ì„œ êµ¬í˜„í• ê»ë‹ˆë‹¤.
+    protected abstract void Attack();
 
-        enemy.TakePhysicalDamage(damage);
-    }
-
-    private IEnumerator AttackCoroutine()
-    {
-        while (true)
-        {
-
-            GameObject arrow = arrowPool.Pop();
-
-            arrow.transform.position = muzzlePos.position;
-            arrow.transform.forward = transform.forward;
-
-            arrow.SetActive(true);
-
-            yield return arrowDelay;
-        }
-    }
-
-    public void CriticalShot()
-    {
-
-    }
+    protected abstract void Upgrade();
     
-    public void Upgrade()
-    {
-        attackPower += 5f;
-        attackSpeed *= 0.9f;
-        arrowDelay = new WaitForSeconds(attackRate / attackSpeed);
-    }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, range);
-    }
+
 }

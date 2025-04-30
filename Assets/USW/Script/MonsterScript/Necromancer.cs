@@ -60,6 +60,8 @@ public class Necromancer : Enemy
                 
                 // y축은 네크로멘서랑 맞추고
                 spawnPos.y = transform.position.y;
+                
+                Vector3 zombieOffset = new Vector3(offsetX, 0, offsetZ);
 
                 GameObject zombieObj = ZombiePoolManager.Instance.GetZombie();
                 zombieObj.transform.position = spawnPos;
@@ -67,7 +69,7 @@ public class Necromancer : Enemy
 
                 Zombie zombie = zombieObj.GetComponent<Zombie>();
                 if (zombie != null)
-                    zombie.Initialize(spawnPos, endPoint, null);
+                    zombie.Initialize(spawnPos, endPoint, wayPoints, zombieOffset,currentWayPointIndex);
             }
 
             if (agent.enabled)

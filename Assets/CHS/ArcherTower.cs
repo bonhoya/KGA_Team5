@@ -26,9 +26,10 @@ public class ArcherTower : MonoBehaviour, ITower
 
     [SerializeField] private Transform targetPos;
 
-    private string arrowType;       // 나중에 추가할 속성? 능력?
-
     [SerializeField] private Transform currentTarget;     // 현재 타겟 저장
+
+    [SerializeField, Range(0f, 1f)] private float criticalChance = 0.2f;   // 20% 확률로 크리티컬
+    [SerializeField] private float criticalMultiplier = 1.5f;             // 크리티컬 시 1.5배 데미지
 
     [SerializeField] private float attackPower;
     [SerializeField] private float range;       // 사거리
@@ -130,6 +131,14 @@ public class ArcherTower : MonoBehaviour, ITower
     }
     public void AttackEnemy(Enemy enemy)
     {
+        float finalDamage = attackPower;
+
+        if (Random.value < criticalChance)
+        {
+            finalDamage *= criticalMultiplier;
+            CriticalShot();
+        }
+
         float damage = GameManager.Instance.CalculatePhysicalDamage(attackPower, enemy.defense);
 
         enemy.TakePhysicalDamage(damage);
@@ -153,7 +162,7 @@ public class ArcherTower : MonoBehaviour, ITower
 
     public void CriticalShot()
     {
-
+        Debug.Log("Critical");
     }
     
     public void Upgrade()

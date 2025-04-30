@@ -4422,7 +4422,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildUI: {fileID: 166035378}
   manageUI: {fileID: 868017780}
-  spawnPoint: {fileID: 472842318}
   testprefab: {fileID: 0}
 --- !u!64 &472842320
 MeshCollider:
@@ -7051,7 +7050,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildUI: {fileID: 166035378}
   manageUI: {fileID: 868017780}
-  spawnPoint: {fileID: 758739080}
   testprefab: {fileID: 0}
 --- !u!64 &758739082
 MeshCollider:
@@ -9396,7 +9394,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildUI: {fileID: 166035378}
   manageUI: {fileID: 868017780}
-  spawnPoint: {fileID: 1066283654}
   testprefab: {fileID: 0}
 --- !u!64 &1066283656
 MeshCollider:
@@ -10943,12 +10940,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1397255486}
+  - {fileID: 166035379}
+  - {fileID: 868017781}
   - {fileID: 1004538448}
   - {fileID: 1960038428}
   - {fileID: 825222524}
   - {fileID: 835313586}
-  - {fileID: 166035379}
-  - {fileID: 868017781}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -12878,7 +12875,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildUI: {fileID: 166035378}
   manageUI: {fileID: 868017780}
-  spawnPoint: {fileID: 1507187815}
   testprefab: {fileID: 0}
 --- !u!64 &1507187817
 MeshCollider:
@@ -13003,7 +12999,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildUI: {fileID: 166035378}
   manageUI: {fileID: 868017780}
-  spawnPoint: {fileID: 1531400292}
   testprefab: {fileID: 0}
 --- !u!64 &1531400294
 MeshCollider:
@@ -14591,7 +14586,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildUI: {fileID: 166035378}
   manageUI: {fileID: 868017780}
-  spawnPoint: {fileID: 1680355223}
   testprefab: {fileID: 0}
 --- !u!64 &1680355225
 MeshCollider:
@@ -18875,7 +18869,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildUI: {fileID: 166035378}
   manageUI: {fileID: 868017780}
-  spawnPoint: {fileID: 2125889557}
   testprefab: {fileID: 1473339042879560, guid: 465501be0b4f81c42a67c6949fbb7ad5, type: 3}
 --- !u!64 &2125889559
 MeshCollider:

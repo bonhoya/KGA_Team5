@@ -68,7 +68,7 @@ public class UIPlaying : MonoBehaviour
 
     }
 
-    private void Update()
+    private void Update()//사실 업데이트가 여기서 할일은 아닌거같은 싱글톤에서 해야지
     {
         if (isOver || !isGameStarted)
         {
@@ -89,13 +89,16 @@ public class UIPlaying : MonoBehaviour
         //적이 다 죽어서 웨이브 끝나면 isWave = false;
     }
 
-    public void UpdateUI()
+    
+
+
+    public void UpdateUI()//골드와 체력이 변할때마다 적용해야할 함수
     {
         healthText.text = health.ToString();
         goldText.text = gold.ToString();
     }
 
-    private void WaveInfo()//웨이브관련
+    private void WaveInfo()//웨이브관련. 웨이브 시작 전에 표시할 함수
     {
         WaveBtn.gameObject.SetActive(true);
         //웨이브가 이방향으로 옵니다 표시

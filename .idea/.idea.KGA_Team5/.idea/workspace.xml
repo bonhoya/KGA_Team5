@@ -7,8 +7,9 @@
     <list default="true" id="d1dbd134-5623-47e8-961b-1b2f29ec8499" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KGA_Team5/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KGA_Team5/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/LMH/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LMH/Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/USW/Script/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/USW/Script/Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/USW/TestScene/TestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/USW/TestScene/TestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/USW/Script/MonsterScript/Ghost.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/USW/Script/MonsterScript/Ghost.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/USW/TestPrefab/Monster.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/USW/TestPrefab/Monster.prefab.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +103,7 @@
       <workItem from="1745834460316" duration="4000" />
       <workItem from="1745887712597" duration="1984000" />
       <workItem from="1745890208976" duration="14875000" />
+      <workItem from="1745981115934" duration="635000" />
     </task>
     <servers />
   </component>

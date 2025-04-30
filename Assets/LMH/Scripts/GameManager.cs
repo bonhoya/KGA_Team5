@@ -7,13 +7,19 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public int playerLife = 10;
+
+    [Header("GameState")]
+    private bool isGameOver;
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(this);
+
+        isGameOver = false;
     }
-    
-    
+
+
+
     /// <summary>
     /// 플레이어가 데미지를 입었을 때 라이프를 감소시키는 함수
     /// </summary>
@@ -22,9 +28,14 @@ public class GameManager : MonoBehaviour
         playerLife -= damage;
         if (playerLife <= 0)
         {
+            // 플레이어의 체력이 0이 되면 게임오버가 진행되고
+            // 스테이지의 밖(메인)으로 나가진다.
+
             playerLife = 0;
-            
+
+            isGameOver = true;
             Debug.Log("Player life has been destroyed");
+
         }
     }
 

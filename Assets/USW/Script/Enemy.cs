@@ -107,11 +107,12 @@ public class Enemy : MonoBehaviour
 
 #region 네크로멘서용 Initialize
 
-public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> wayPointList)
+public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> wayPointList, Vector3 zombieOffset,int startWayPointIndex)
 {
     endPoint = end;
     wayPoints = wayPointList;
-    currentWayPointIndex = 0;
+    currentWayPointIndex = startWayPointIndex;
+    offset = zombieOffset; 
 
     agent.enabled = false;
     transform.position = spawnPos;
@@ -129,11 +130,11 @@ public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> 
         gameObject.SetActive(false);              // 적 오브젝트 비활성화(풀로 반환)
     }
         
-    // 첫번째 웨이포인트로 이동 시작 
+   
 
-    if (wayPoints != null && wayPoints.Count > 0)
+    if (wayPoints != null && currentWayPointIndex <wayPoints.Count)
     {
-        agent.SetDestination(wayPoints[0].position+offset);
+        agent.SetDestination(wayPoints[currentWayPointIndex].position + offset);
     }
     else
     {
@@ -160,7 +161,7 @@ public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> 
                     currentWayPointIndex++;
                     if (currentWayPointIndex < wayPoints.Count)
                     {
-                        agent.SetDestination(wayPoints[currentWayPointIndex].position);
+                        agent.SetDestination(wayPoints[currentWayPointIndex].position+offset);
                     }
                     else
                     {

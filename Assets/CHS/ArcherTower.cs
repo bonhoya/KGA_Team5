@@ -5,7 +5,7 @@ using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public enum WeaponState { SearchTarget, AttackToTarget }        // 적을 발견하고 쏜다
-public class ArcherTower : MonoBehaviour, ITower
+public class ArcherTower : MonoBehaviour
 {
 
     [SerializeField] private GameObject arrowPrefab;

@@ -28,16 +28,16 @@ public class BuildPoint : MonoBehaviour
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                
-                if (!Physics.Raycast(ray, out RaycastHit hit) && a != 0)
-                {
-                    CloseAllUI();
-                    a = 0;
-                }
+
+            if (!Physics.Raycast(ray, out RaycastHit hit) && a != 0)
+            {
+                CloseAllUI();
+                a = 0;
+            }
 
 
         }
-     
+
     }
 
     private void OnMouseDown()
@@ -122,7 +122,8 @@ public class BuildPoint : MonoBehaviour
     }
     public void BuildTower(GameObject prefab)
     {
-        currentTower = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
+        currentTower = Instantiate(prefab, spawnPoint.position + Vector3.up, Quaternion.identity);
+        //일단 스폰포지션에 1 더하는걸로 했는데 첨부터 스폰포인트를 조정하는게 나을거같은데
         buildUI.SetActive(false);
     }
 
@@ -131,7 +132,7 @@ public class BuildPoint : MonoBehaviour
         // 업그레이드 로직
         // 업글전 타워파괴 업글후 타워생성
         Destroy(currentTower);
-        currentTower = Instantiate(testprefab, spawnPoint.position, Quaternion.identity);//테스트용
+        currentTower = Instantiate(testprefab, spawnPoint.position + Vector3.up, Quaternion.identity);//테스트용
         //currentTower = Instantiate();
         //다음레벨 타워를 어떻게 가져오지
         Debug.Log("업그레이드됨");

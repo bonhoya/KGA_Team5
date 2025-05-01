@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class TutorialBoss : Enemy
 {
     private Animator animator;
-    [SerializeField] private ParticleSystem deathParticles;
+    [SerializeField] public ParticleSystem deathEffect;
 
     private void Awake()
     {
@@ -52,9 +52,9 @@ public class TutorialBoss : Enemy
 
     private void TriggerOnDeath()
     {
-        if (deathParticles != null)
+        if (deathEffect != null)
         {
-            Instantiate(deathParticles, transform.position, Quaternion.identity);
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
         }
         base.OnDeath();
     }

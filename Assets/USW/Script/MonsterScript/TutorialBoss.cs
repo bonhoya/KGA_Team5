@@ -8,6 +8,7 @@ using UnityEngine.AI;
 public class TutorialBoss : Enemy
 {
     private Animator animator;
+    [SerializeField] private ParticleSystem deathParticles;
 
     private void Awake()
     {
@@ -18,6 +19,12 @@ public class TutorialBoss : Enemy
 
     public override void Initialize(Transform spawn, Transform end, List<Transform> wayPointList)
     {
+        maxHealth = 100f; 
+        currentHealth = maxHealth; 
+        defense = 0.1f; 
+        magicResistance = 0.1f; 
+        moveSpeed = 4f; 
+        
         base.Initialize(spawn, end, wayPointList);
         animator.SetBool("isMoving", false);
         animator.SetBool("isSkill", false);
@@ -39,9 +46,19 @@ public class TutorialBoss : Enemy
     {
         agent.enabled = false;
         animator.SetBool("isDead", true);
-        OnDeath();
+        Invoke("TriggerOnDeath", 2.0f);
+        
     }
 
+    private void TriggerOnDeath()
+    {
+        if (deathParticles != null)
+        {
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
+        }
+        base.OnDeath();
+    }
+    
     public virtual void UseSkill()
     {
         animator.SetBool("isSkill", true);

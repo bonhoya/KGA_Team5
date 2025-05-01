@@ -183,6 +183,13 @@ public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> 
                 }
             }
         }
+
+        if (0 >= currentHealth)
+        {
+            Die();
+        }
+        
+
     }
 
 
@@ -220,8 +227,7 @@ public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> 
         // NavMeshAgent 비활성화
         agent.enabled = false;
         
-        // 풀링 시스템에 반환 요청 (이벤트 호출)
-        onDeath?.Invoke(gameObject); 
+        OnDeath();
     }
 
     // 다른쪽 스크립트에서 사용하기를 위함.

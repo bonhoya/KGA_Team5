@@ -3,6 +3,7 @@ using UnityEngine;
 public class Orc : Enemy
 {
     
+    
     private bool hadEnraged = false;
     
     // 분노 상태 관련 변수
@@ -73,7 +74,7 @@ public class Orc : Enemy
         // 분노 상태 체크 체력이 일정 수준 이하로 떨어지면 분노 상태 돌입
         if (!isEnraged && !hadEnraged && currentHealth <= maxHealth * enrageThreshold)
         {
-            StartEnrage();
+            StartEnrage(); 
         }
 
 

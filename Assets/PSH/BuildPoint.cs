@@ -6,6 +6,7 @@ public class BuildPoint : MonoBehaviour
 {
     public GameObject buildUI;
     public GameObject manageUI;
+    public GameObject goldAlert;
     private Transform spawnPoint;
 
     private GameObject currentTower;
@@ -46,6 +47,8 @@ public class BuildPoint : MonoBehaviour
     private void OnMouseDown()
     {
         if (Time.timeScale == 0f)//일시정지때는 작동 안하게
+            return;
+        if (EventSystem.current.IsPointerOverGameObject())
             return;
 
         if (currentTower == null)
@@ -128,9 +131,18 @@ public class BuildPoint : MonoBehaviour
         towerType = n;
         towerLevel = 0;
 
+        /*
+          if(돈이 부족하면)
+          {
+          NotEnoughGold();
+                return;
+          }
+          */
+
         switch (n)
         {
             case 1:
+               
                 currentTower = Instantiate(tower1[0], spawnPoint.position + Vector3.up, Quaternion.identity);
                 break;
             case 2:
@@ -179,5 +191,31 @@ public class BuildPoint : MonoBehaviour
         Destroy(currentTower);
         currentTower = null;
         manageUI.SetActive(false);
+    }
+
+    public void NotEnoughGold()
+    {
+        goldAlert.SetActive(true);
+        goldAlert.transform.position = Camera.main.WorldToScreenPoint(transform.position);
+        StartCoroutine(UpandFadeOutCoroutine());
+    }
+
+    IEnumerator UpandFadeOutCoroutine()//사실 페이드아웃은 안했어 귀찮아서
+    {
+        float duration = 0.5f;
+        float timer = 0;
+        Vector3 curPos = goldAlert.transform.position;
+        Vector3 laterPos = curPos + new Vector3 (0,100,0);
+       
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float t = Mathf.Clamp01(timer / duration);
+            goldAlert.transform.position = Vector3.Lerp(curPos, laterPos, t);
+            
+            yield return null;
+        }
+
+        goldAlert.SetActive(false);
     }
 }

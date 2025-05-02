@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d1dbd134-5623-47e8-961b-1b2f29ec8499" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KGA_Team5/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KGA_Team5/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/USW/Script/MonsterScript/TutorialBoss.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/USW/Script/MonsterScript/TutorialBoss.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/USW/TestPrefab/TutorialBoss.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/USW/TestPrefab/TutorialBoss.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/USW/TestScene/TestBossScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/USW/TestScene/TestBossScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +105,7 @@
       <workItem from="1745981115934" duration="5129000" />
       <workItem from="1745987233380" duration="10361000" />
       <workItem from="1746076407224" duration="3652000" />
+      <workItem from="1746149359664" duration="1265000" />
     </task>
     <servers />
   </component>

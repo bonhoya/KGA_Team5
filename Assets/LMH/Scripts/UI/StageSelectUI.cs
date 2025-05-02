@@ -5,5 +5,13 @@ using UnityEngine.UI;
 
 public class StageSelectUI : MonoBehaviour
 {
-   
+   public void Resume()
+    {
+        
+    }
+
+    public void Quit()
+    {
+
+    }
 }

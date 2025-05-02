@@ -11,7 +11,13 @@ public class BuildPoint : MonoBehaviour
     private GameObject currentTower;
     private int a;//현재 선택중인 ui가 빈공간인지 buildUI인지 manageUI인지 구분하기위함 0, 1, 2
 
-    public GameObject testprefab;
+    //타워별배열
+    public GameObject[] tower1;
+    public GameObject[] tower2;
+    public GameObject[] tower3;
+
+    private int towerType = 0;
+    private int towerLevel = 0;
 
     private void Awake()
     {
@@ -34,10 +40,7 @@ public class BuildPoint : MonoBehaviour
                 CloseAllUI();
                 a = 0;
             }
-
-
         }
-
     }
 
     private void OnMouseDown()
@@ -120,22 +123,54 @@ public class BuildPoint : MonoBehaviour
                 break;
         }
     }
-    public void BuildTower(GameObject prefab)
+    public void BuildTower(int n)//n에 따라 타워 건설하기
     {
-        currentTower = Instantiate(prefab, spawnPoint.position + Vector3.up, Quaternion.identity);
+        towerType = n;
+        towerLevel = 0;
+
+        switch (n)
+        {
+            case 1:
+                currentTower = Instantiate(tower1[0], spawnPoint.position + Vector3.up, Quaternion.identity);
+                break;
+            case 2:
+                currentTower = Instantiate(tower2[0], spawnPoint.position + Vector3.up, Quaternion.identity);
+                break;
+            case 3:
+                currentTower = Instantiate(tower3[0], spawnPoint.position + Vector3.up, Quaternion.identity);
+                break;
+            default:
+                break;
+        }
         //일단 스폰포지션에 1 더하는걸로 했는데 첨부터 스폰포인트를 조정하는게 나을거같은데
         buildUI.SetActive(false);
     }
 
     public void UpgradeTower()
     {
-        // 업그레이드 로직
-        // 업글전 타워파괴 업글후 타워생성
-        Destroy(currentTower);
-        currentTower = Instantiate(testprefab, spawnPoint.position + Vector3.up, Quaternion.identity);//테스트용
-        //currentTower = Instantiate();
-        //다음레벨 타워를 어떻게 가져오지
-        Debug.Log("업그레이드됨");
+        towerLevel++;
+
+        if (towerType == 1 && towerLevel < tower1.Length)
+        {
+            Destroy(currentTower);
+            currentTower = Instantiate(tower1[towerLevel], spawnPoint.position + Vector3.up, Quaternion.identity);
+        }
+        else if (towerType == 2 && towerLevel < tower2.Length)
+        {
+            Destroy(currentTower);
+            currentTower = Instantiate(tower2[towerLevel], spawnPoint.position + Vector3.up, Quaternion.identity);
+        }
+        else if (towerType == 3 && towerLevel < tower3.Length)
+        {
+            Destroy(currentTower);
+            currentTower = Instantiate(tower3[towerLevel], spawnPoint.position + Vector3.up, Quaternion.identity);
+        }
+        else
+        {
+            towerLevel--; // 되돌리기
+            Debug.Log("최대 업그레이드 단계입니다");
+        }
+
         manageUI.SetActive(false);
     }
 

@@ -19,10 +19,11 @@ public class Enemy : MonoBehaviour
     /// 적이 생성될 위치 
     /// </summary>
     public Transform spawnPoint;
-
+    
     /// <summary>
     /// 적 상태창
     /// </summary>
+    [Header("적 상태창")]
     public float maxHealth = 0f;
     public float currentHealth;
     public float attackPower = 0f;
@@ -34,6 +35,7 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// 네비
     /// </summary>
+    [Header("적 네비창")]
     [SerializeField] protected NavMeshAgent agent;
 
     /// <summary>
@@ -99,6 +101,7 @@ public class Enemy : MonoBehaviour
         {
             agent.SetDestination(endPoint.position);
         }
+        // 초기 애니메이션 초기화
         
         InitializeStats();
     }
@@ -107,11 +110,12 @@ public class Enemy : MonoBehaviour
 
 #region 네크로멘서용 Initialize
 
-public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> wayPointList)
+public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> wayPointList, Vector3 zombieOffset,int startWayPointIndex)
 {
     endPoint = end;
     wayPoints = wayPointList;
-    currentWayPointIndex = 0;
+    currentWayPointIndex = startWayPointIndex;
+    offset = zombieOffset; 
 
     agent.enabled = false;
     transform.position = spawnPos;
@@ -129,11 +133,11 @@ public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> 
         gameObject.SetActive(false);              // 적 오브젝트 비활성화(풀로 반환)
     }
         
-    // 첫번째 웨이포인트로 이동 시작 
+   
 
-    if (wayPoints != null && wayPoints.Count > 0)
+    if (wayPoints != null && currentWayPointIndex <wayPoints.Count)
     {
-        agent.SetDestination(wayPoints[0].position+offset);
+        agent.SetDestination(wayPoints[currentWayPointIndex].position + offset);
     }
     else
     {
@@ -160,7 +164,7 @@ public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> 
                     currentWayPointIndex++;
                     if (currentWayPointIndex < wayPoints.Count)
                     {
-                        agent.SetDestination(wayPoints[currentWayPointIndex].position);
+                        agent.SetDestination(wayPoints[currentWayPointIndex].position+offset);
                     }
                     else
                     {
@@ -179,6 +183,13 @@ public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> 
                 }
             }
         }
+
+        if (0 >= currentHealth)
+        {
+            Die();
+        }
+        
+
     }
 
 
@@ -216,7 +227,12 @@ public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> 
         // NavMeshAgent 비활성화
         agent.enabled = false;
         
-        // 풀링 시스템에 반환 요청 (이벤트 호출)
-        onDeath?.Invoke(gameObject); 
+        OnDeath();
+    }
+
+    // 다른쪽 스크립트에서 사용하기를 위함.
+    protected virtual void OnDeath()
+    {
+        onDeath?.Invoke(gameObject);
     }
 }

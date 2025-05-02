@@ -24,14 +24,14 @@ public class UIManager : MonoBehaviour
     {
         GameObject mainScreenUI = GameObject.Find("MainMenuCanvas");
         SetUI("MainScreenUI", mainScreenUI);
-        //Debug.Log("ÇöÀç ¸ÞÀÎ ½ºÅ©¸° UI°¡ ÀúÀåµÇ¾ú½À´Ï´Ù.");
+        //Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ UIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
     }
 
     /// <summary>
-    /// UI¸¦ Dictionary¿¡ ÀúÀå
+    /// UIï¿½ï¿½ Dictionaryï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     /// </summary>
-    /// <param name="key">UI¿¡ ÀúÀåµÉ UIÀÌ¸§</param>
-    /// <param name="uiObject">ÀúÀåÇÏ°íÀÚ ÇÏ´Â ´ë»ó</param>
+    /// <param name="key">UIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ UIï¿½Ì¸ï¿½</param>
+    /// <param name="uiObject">ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½</param>
     public void SetUI(string key, GameObject uiObject)
     {
         if (uiDic.ContainsKey(key) == false)
@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
             uiDic.Add(key, uiObject);
         }
         else
-            Debug.Log($"UIManager: ÇöÀç {key}´Â ÀÌ¹Ì µî·ÏµÈ Å° ÀÔ´Ï´Ù."); //
+            Debug.Log($"UIManager: ï¿½ï¿½ï¿½ï¿½ {key}ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½Ïµï¿½ Å° ï¿½Ô´Ï´ï¿½."); //
     }
 
     public GameObject GetUI(string key)
@@ -53,9 +53,9 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// UI¸¦ º¸ÀÌ°Ô(È°¼ºÈ­) ÇÏ±â
+    /// UIï¿½ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½(È°ï¿½ï¿½È­) ï¿½Ï±ï¿½
     /// </summary>
-    /// <param name="key">UI¿¡ ÀúÀåµÉ UIÀÌ¸§</param>
+    /// <param name="key">UIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ UIï¿½Ì¸ï¿½</param>
     public void ShowUI(string key)
     {
         GameObject uiObject = GetUI(key);
@@ -66,9 +66,9 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// UI¸¦ ¾Èº¸ÀÌ°Ô(ºñÈ°¼ºÈ­) ÇÏ±â
+    /// UIï¿½ï¿½ ï¿½Èºï¿½ï¿½Ì°ï¿½(ï¿½ï¿½È°ï¿½ï¿½È­) ï¿½Ï±ï¿½
     /// </summary>
-    /// <param name="key">UI¿¡ ÀúÀåµÉ UIÀÌ¸§</param>
+    /// <param name="key">UIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ UIï¿½Ì¸ï¿½</param>
     public void HideUI(string key)
     {
         GameObject uiObject = GetUI(key);
@@ -76,5 +76,6 @@ public class UIManager : MonoBehaviour
         {
             uiObject.SetActive(false);
         }
+
     }
 }

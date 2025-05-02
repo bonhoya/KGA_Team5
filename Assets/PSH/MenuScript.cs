@@ -7,10 +7,12 @@ public class MenuScript : MonoBehaviour
 {
     public GameObject menu;
     public GameObject stageSelect;
+    public GameObject option;
 
     private void Awake()
     {
         stageSelect.SetActive(false);
+        option.SetActive(false);
     }
     public void StartClick()
     {
@@ -22,11 +24,16 @@ public class MenuScript : MonoBehaviour
     {
         Application.Quit();
     }
-
+    public void OptionClick()
+    {
+        menu.SetActive(false);
+        option.SetActive(true);
+    }
     public void UndoClick()
     {
         menu.SetActive(true);
         stageSelect.SetActive(false);
+        option.SetActive(false);
     }
 
     public void StageClick(int n)

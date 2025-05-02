@@ -75,9 +75,9 @@ public class GameManager : MonoBehaviour
         return Mathf.Max(0, reduced);
     }
 
-    public float CalculateMagicDamage(float attackerMagic, float defenderMagicRresist)
+    public float CalculateMagicDamage(float attackerMagic, float defenderMagicResist)
     {
-        float reduced = attackerMagic * (1f - defenderMagicRresist);
+        float reduced = attackerMagic * (1f - defenderMagicResist);
         return Mathf.Max(0, reduced);
     }
     

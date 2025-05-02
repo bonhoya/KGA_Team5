@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d1dbd134-5623-47e8-961b-1b2f29ec8499" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KGA_Team5/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KGA_Team5/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LMH/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LMH/Scripts/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/USW/Script/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/USW/Script/Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/USW/TestScene/TestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/USW/TestScene/TestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/USW/TestScene/TestBossScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/USW/TestScene/TestBossScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +20,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5eddeaad60a14d8ab4eb3a7453824232177200/b5/0ccd8be3/MonoBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bd104e9094b14e93b440017bf9d8b973d400/45/6b96bb34/NavMeshAgent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/USW/Script/MonsterScript/Zombie.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/USW/Script/MonsterScript/ZombiePoolManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/USW/Script/WayPointPath.cs" root0="FORCE_HIGHLIGHTING" />
@@ -102,6 +102,10 @@
       <workItem from="1745834460316" duration="4000" />
       <workItem from="1745887712597" duration="1984000" />
       <workItem from="1745890208976" duration="14875000" />
+      <workItem from="1745981115934" duration="5129000" />
+      <workItem from="1745987233380" duration="10361000" />
+      <workItem from="1746076407224" duration="3652000" />
+      <workItem from="1746149359664" duration="1265000" />
     </task>
     <servers />
   </component>

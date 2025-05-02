@@ -183,13 +183,7 @@ public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> 
                 }
             }
         }
-
-        if (0 >= currentHealth)
-        {
-            Die();
-        }
         
-
     }
 
 

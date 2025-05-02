@@ -8402,6 +8402,10 @@ PrefabInstance:
       propertyPath: wayPoints.Array.data[3]
       value: 
       objectReference: {fileID: 1148683037}
+    - target: {fileID: 95403861705560305, guid: 5300559c43c72d844985ffb1859db8c4, type: 3}
+      propertyPath: waves.Array.data[0].enemyPrefab
+      value: 
+      objectReference: {fileID: 9085773717613186765, guid: e1228c49b3ee9304fa6a844b2fa6d053, type: 3}
     - target: {fileID: 6164774354432115737, guid: 5300559c43c72d844985ffb1859db8c4, type: 3}
       propertyPath: m_Name
       value: EnemySpawner

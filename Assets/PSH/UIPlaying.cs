@@ -102,7 +102,7 @@ public class UIPlaying : MonoBehaviour
     {
         WaveBtn.gameObject.SetActive(true);
         //웨이브가 이방향으로 옵니다 표시
-        waveLine.DrawPath(1, 1);//몇스테이지 몇번째웨이브라는뜻
+        waveLine.DrawPath(2, 2);//몇스테이지 몇번째웨이브라는뜻
                                 //표시할것들은 currentWave와 관련되게 배열쓰면 될듯
 
     }

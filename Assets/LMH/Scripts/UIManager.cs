@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
     {
         GameObject mainScreenUI = GameObject.Find("MainMenuCanvas");
         SetUI("MainScreenUI", mainScreenUI);
-        Debug.Log("현재 메인 스크린 UI가 저장되었습니다.");
+        //Debug.Log("현재 메인 스크린 UI가 저장되었습니다.");
     }
 
     /// <summary>

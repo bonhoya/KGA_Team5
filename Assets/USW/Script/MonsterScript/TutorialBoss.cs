@@ -29,8 +29,8 @@ public class TutorialBoss : Enemy
         animator.SetBool("isMoving", false);
         animator.SetBool("isSkill", false);
         animator.SetBool("isDead", false);
+        
     }
-    
     
     protected override void Update()
     {
@@ -69,4 +69,11 @@ public class TutorialBoss : Enemy
     {
         animator.SetBool("isSkill", false);
     }
+
+    // 만약에 int 에다가 isMoving 하잖아요 ? 그러면 Ismoving 에 ㅎ시값 (  int ) 를 변환해서 변수에 저장하는 시스템이래요
+    // setbool 함수는 string 하고 int를 둘다 받을수있데요 
+    // 미리 만들어둔 해시값을 넘겨줄수있다는 내요 ㅇ이 
+    // move , Move , MOve 다 다른 해시값이잖아요
+    // 
+
 }

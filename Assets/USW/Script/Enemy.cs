@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour
         // 일단 일어나봐 메쉬야
         agent = GetComponent<NavMeshAgent>(); 
     }
-
+    
     #region EnemySpawner 용 초기화 함수
     
     /// <summary>

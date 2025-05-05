@@ -16,9 +16,9 @@ public class BuildManager : MonoBehaviour
         currentSpot = spot;
     }
 
-    public void BuildSelectedTower(GameObject towerPrefab)
+    public void BuildSelectedTower(int n)
     {
-        currentSpot?.BuildTower(towerPrefab);
+        currentSpot?.BuildTower(n);
     }
 
     public void UpgradeTower()

@@ -83,7 +83,7 @@ public class UIPlaying : MonoBehaviour
         //적이 다 죽어서 웨이브 끝나면 isWave = false;
     }
 
-    
+
 
 
     public void UpdateUI()//골드와 체력이 변할때마다 적용해야할 함수

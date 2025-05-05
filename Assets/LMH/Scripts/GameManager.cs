@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public int playerLife = 10;
+    public int playerLife = 20;
 
     [Header("GameState")]
     private bool isGameOver;

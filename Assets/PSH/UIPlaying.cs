@@ -29,7 +29,6 @@ public class UIPlaying : MonoBehaviour
     private bool isGameStarted = false;
     private bool isWave = false;
 
-    private int health = 10;
     private int gold = 100;
 
     private float timer = 0f;
@@ -94,7 +93,7 @@ public class UIPlaying : MonoBehaviour
 
     public void UpdateUI()//골드와 체력이 변할때마다 적용해야할 함수
     {
-        healthText.text = health.ToString();
+        healthText.text = GameManager.Instance.playerLife.ToString();
         goldText.text = gold.ToString();
     }
 
@@ -124,15 +123,17 @@ public class UIPlaying : MonoBehaviour
             Time.timeScale = 0;
             PopupWin.SetActive(true);
             isOver = true;
+            GameManager.Instance.playerLife = 20;
         }
 
-        if (health <= 0)
+        if (GameManager.Instance.playerLife <= 0)
         {
             //게임멈추고 게임오버 이미지를 열어
             gamePause = 0;
             Time.timeScale = 0;
             PopupLose.SetActive(true);
             isOver = true;
+            GameManager.Instance.playerLife = 20;
         }
 
     }

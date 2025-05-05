@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerCameraController : MonoBehaviour
 {
@@ -30,6 +27,10 @@ public class PlayerCameraController : MonoBehaviour
         MouseMove();
         MouseZoomInOut();
         DetectCamera();
+        if (hitTarget == "Stage1")
+        {
+            SceneChangeManager.Instance.ChangeScene("Map1");
+        }
     }
 
     private void KeyMove()
@@ -44,12 +45,12 @@ public class PlayerCameraController : MonoBehaviour
 
     private void MouseMove()
     {
-        if(Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))
         {
             inputMousePos = Input.mousePosition;
         }
 
-        if(Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1))
         {
             Vector2 preMousePos = (Vector2)Input.mousePosition - inputMousePos;
             Vector3 isMovedPos = new Vector3(preMousePos.x, 0, preMousePos.y);
@@ -67,16 +68,16 @@ public class PlayerCameraController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, hitRayPos);
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, hitRayPos);
     }
 
     private void DetectCamera()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out RaycastHit hitInfo))
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hitInfo))
             {
                 hitRayPos = hitInfo.point;
                 layerNum = hitInfo.collider.gameObject.layer;

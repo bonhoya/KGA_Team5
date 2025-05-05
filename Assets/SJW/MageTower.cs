@@ -7,21 +7,28 @@ public class MageTower : Tower
     [Header("마법 타워 전용 설정")]
     [SerializeField] private GameObject magicPrefab;  // 마법 투사체 프리팹
     [SerializeField] private Transform firePoint;     // 발사 위치
-    [SerializeField] private SphereCollider rangeCollider;
+    
+    private Coroutine fireCoroutine;
+    private YieldInstruction fireDelay;
 
     private float attackCooldown = 0f;
 
-    void Start()
+
+    private void OnDrawGizmos()
     {
-        if (rangeCollider != null)
-        {
-            rangeCollider.radius = range;
-            rangeCollider.isTrigger = true;
-            rangeCollider.center = Vector3.zero; // 타워 중심에 맞춤
-        }
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 
-    protected override void Update()
+
+    private IEnumerator FireCoroutine()
+    {
+        yield return fireDelay;
+    }
+
+
+
+    void Update()
     {
         base.Update();
 
@@ -33,9 +40,7 @@ public class MageTower : Tower
 
     protected override void Attack()
     {
-        if (attackCooldown > 0f || currentTarget == null) return;
-        Debug.Log("마법발사!");
-        attackCooldown = 1f / attackSpeed;
+        GameObject energyBall = Instantiate(magicPrefab, firePoint.position, Quaternion.identity);
     }
 
     protected override void Upgrade()
@@ -46,9 +51,4 @@ public class MageTower : Tower
         Debug.Log("업글");
     }
 
-    void OnValidate()
-    {
-        if (rangeCollider != null)
-            rangeCollider.radius = range;
-    }
 }

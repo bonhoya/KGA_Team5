@@ -19,10 +19,11 @@ public class Enemy : MonoBehaviour
     /// 적이 생성될 위치 
     /// </summary>
     public Transform spawnPoint;
-
+    
     /// <summary>
     /// 적 상태창
     /// </summary>
+    [Header("적 상태창")]
     public float maxHealth = 0f;
     public float currentHealth;
     public float attackPower = 0f;
@@ -34,6 +35,7 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// 네비
     /// </summary>
+    [Header("적 네비창")]
     [SerializeField] protected NavMeshAgent agent;
 
     /// <summary>
@@ -57,7 +59,7 @@ public class Enemy : MonoBehaviour
         // 일단 일어나봐 메쉬야
         agent = GetComponent<NavMeshAgent>(); 
     }
-
+    
     #region EnemySpawner 용 초기화 함수
     
     /// <summary>
@@ -99,6 +101,7 @@ public class Enemy : MonoBehaviour
         {
             agent.SetDestination(endPoint.position);
         }
+        // 초기 애니메이션 초기화
         
         InitializeStats();
     }
@@ -180,6 +183,7 @@ public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> 
                 }
             }
         }
+        
     }
 
 
@@ -217,7 +221,12 @@ public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> 
         // NavMeshAgent 비활성화
         agent.enabled = false;
         
-        // 풀링 시스템에 반환 요청 (이벤트 호출)
-        onDeath?.Invoke(gameObject); 
+        OnDeath();
+    }
+
+    // 다른쪽 스크립트에서 사용하기를 위함.
+    protected virtual void OnDeath()
+    {
+        onDeath?.Invoke(gameObject);
     }
 }

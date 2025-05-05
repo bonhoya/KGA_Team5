@@ -6,14 +6,49 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public int playerLife = 10;
+    public int playerLife = 20;
+    public int gold = 100;
+
+    [Header("GameState")]
+    [SerializeField] public bool isGameOver;
+    [SerializeField] public bool isClearedStageOne;
+    [SerializeField] public bool isClearedStageTwo;
+    [SerializeField] public bool isClearedStageThr;
+    [SerializeField] public float timer;
+    [SerializeField] public bool isStageStarted;
+    [SerializeField] public int isGamePause = 1;
     private void Awake()
     {
-        if (Instance == null) Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         else Destroy(this);
+
+        awakeState();
+
     }
-    
-    
+
+    private void Update()
+    {
+        if (isStageStarted == true)
+        {
+            timer += Time.deltaTime * isGamePause;
+        }
+    }
+
+    public void awakeState()
+    {
+        isGameOver = false;
+        isClearedStageOne = false;
+        isClearedStageTwo = false;
+        isClearedStageThr = false;
+        isStageStarted = false;
+        timer = 0f;
+    }
+
+
     /// <summary>
     /// 플레이어가 데미지를 입었을 때 라이프를 감소시키는 함수
     /// </summary>
@@ -22,9 +57,14 @@ public class GameManager : MonoBehaviour
         playerLife -= damage;
         if (playerLife <= 0)
         {
+            // 플레이어의 체력이 0이 되면 게임오버가 진행되고
+            // 스테이지의 밖(메인)으로 나가진다.
+
             playerLife = 0;
-            
+
+            isGameOver = true;
             Debug.Log("Player life has been destroyed");
+
         }
     }
 
@@ -73,5 +113,10 @@ public class GameManager : MonoBehaviour
    //- Enemy는 defense, magicResist로 방어력을 통일
    //- 퍼센트 경감 방식이므로 defense/magicResist 값은 0~1 사이로 설정
    //-------------------------------------------
+
+    public void gameOver()
+    {
+
+    }
 }
 

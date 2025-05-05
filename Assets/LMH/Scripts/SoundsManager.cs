@@ -14,6 +14,8 @@ public class SoundsManager : MonoBehaviour
     public AudioSource bgm;
     public AudioClip[] bgmlist;
     public AudioMixer audioMixer;
+    public float bgmVolume = 1.0f;
+    public float sfxVolume = 1.0f;
 
     private void Awake()
     {
@@ -21,7 +23,7 @@ public class SoundsManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            //SceneManager.sceneLoaded += OnSceneLoaded;
+            SceneManager.sceneLoaded += OnSceneLoaded;
             backGroundMusicPlay(bgmlist[0]);
             
         }
@@ -29,6 +31,11 @@ public class SoundsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        
     }
     // 기본적으로 출력하는 배경음악
     public void backGroundMusicPlay(AudioClip cilp)
@@ -52,23 +59,26 @@ public class SoundsManager : MonoBehaviour
     }
 
     // 씬에 의해 변경되는 배경음악
-    /*private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         for(int i = 0; i < bgmlist.Length; i++)
         {
-            if (arg0.name == bgmlist[i].name);
+            if (arg0.name == bgmlist[i].name)
+            {
+                backGroundMusicPlay(bgmlist[i]);
+            }
         }
-    }*/
+    }
 
     // UI와 연결되는 배경음악 컨트롤러
-    public void BGMController(float value)
+    /*public void BGMController(float value)
     {
         audioMixer.SetFloat("BGMParam", Mathf.Log10(value) * 20);
-    }
+    }*/
 
     // UI와 연결되는 효과음 컨트롤러
-    public void SFXController(float value)
+    /*public void SFXController(float value)
     {
         audioMixer.SetFloat("SFXParam", Mathf.Log10(value) * 20);
-    }
+    }*/
 }

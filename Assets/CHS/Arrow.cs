@@ -8,11 +8,16 @@ public class Arrow : MonoBehaviour
     [SerializeField] private Rigidbody rigid;
 
     [SerializeField] private float arrowSpeed;
-    [SerializeField] private int enemyHealth;
-    [SerializeField] private int arrowPower;
 
     public Stack<GameObject> returnPool;
 
+    private void Update()
+    {
+        if (rigid.velocity.magnitude > 1)
+        {
+            transform.forward= rigid.velocity;
+        }
+    }
     private void OnEnable()
     {
         rigid.AddForce(transform.forward * arrowSpeed, ForceMode.Impulse);

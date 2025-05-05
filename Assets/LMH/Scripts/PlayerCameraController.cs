@@ -13,6 +13,7 @@ public class PlayerCameraController : MonoBehaviour
     [Header("ZoomLimit")]
     [SerializeField] private float cameraZoomInLimit;
     [SerializeField] private float cameraZoomOutLimit;
+
     private Vector3 inputKeyPos;
     private Vector2 inputMousePos;
     private Vector3 hitRayPos;
@@ -23,7 +24,6 @@ public class PlayerCameraController : MonoBehaviour
 
     private void Update()
     {
-        KeyMove();
         MouseMove();
         MouseZoomInOut();
         DetectCamera();
@@ -31,16 +31,18 @@ public class PlayerCameraController : MonoBehaviour
         {
             SceneChangeManager.Instance.ChangeScene("Map1");
         }
-    }
-
-    private void KeyMove()
-    {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        inputKeyPos = new Vector3(x, 0, z).normalized;
-
-        transform.Translate(inputKeyPos * cameraMoveSpeed * Time.deltaTime, Space.World);
+        if(hitTarget == "Stage2" && GameManager.Instance.isClearedStageOne == true)
+        {
+            SceneChangeManager.Instance.ChangeScene("Map2");
+        }
+        if (hitTarget == "Stage3" && GameManager.Instance.isClearedStageTwo == true)
+        {
+            SceneChangeManager.Instance.ChangeScene("Map3");
+        }
+        if (hitTarget == "Stage4" && GameManager.Instance.isClearedStageThr == true)
+        {
+            SceneChangeManager.Instance.ChangeScene("Map4");
+        }
     }
 
     private void MouseMove()
@@ -55,7 +57,6 @@ public class PlayerCameraController : MonoBehaviour
             Vector2 preMousePos = (Vector2)Input.mousePosition - inputMousePos;
             Vector3 isMovedPos = new Vector3(preMousePos.x, 0, preMousePos.y);
             transform.Translate(isMovedPos * cameraMouseMoveSpeed * Time.deltaTime, Space.World);
-
             preMousePos = Input.mousePosition;
         }
     }
@@ -88,4 +89,5 @@ public class PlayerCameraController : MonoBehaviour
             }
         }
     }
+
 }

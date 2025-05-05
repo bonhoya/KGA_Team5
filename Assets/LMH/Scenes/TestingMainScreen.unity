@@ -2561,6 +2561,7 @@ MonoBehaviour:
   bgmlist:
   - {fileID: 8300000, guid: 470544d826c66474292cba7d3aa87ef3, type: 3}
   - {fileID: 8300000, guid: d9544df379cbbaf46ad61885fd078234, type: 3}
+  - {fileID: 8300000, guid: de55399a86c1d174bb2ade9b06650adc, type: 3}
   audioMixer: {fileID: 24100000, guid: 403783044fe37374eb880296d1af37ed, type: 2}
   bgmVolume: 1
   sfxVolume: 1

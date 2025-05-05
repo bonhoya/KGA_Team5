@@ -61,8 +61,6 @@ public class GameManager : MonoBehaviour
             // 스테이지의 밖(메인)으로 나가진다.
 
             playerLife = 0;
-
-            isGameOver = true;
             Debug.Log("Player life has been destroyed");
 
         }
@@ -114,9 +112,5 @@ public class GameManager : MonoBehaviour
    //- 퍼센트 경감 방식이므로 defense/magicResist 값은 0~1 사이로 설정
    //-------------------------------------------
 
-    public void gameOver()
-    {
-
-    }
 }
 

@@ -23,6 +23,10 @@ public class UIPlaying : MonoBehaviour
 
     public WaveLine waveLine;
 
+    [Header("Saved Volume_Value")]
+    [SerializeField] private Slider bgmSlider;
+    [SerializeField] private Slider sfxSlider;
+
     private bool isPaused = false;
     private bool isDoubled = false;
     private bool isOver = false;
@@ -57,6 +61,17 @@ public class UIPlaying : MonoBehaviour
 
         UpdateUI();
 
+        if (bgmSlider != null)
+        {
+            bgmSlider.value = SoundsManager.Instance.bgmVolume;
+            bgmSlider.onValueChanged.AddListener(StageSelectBGMController);
+        }
+
+        if (sfxSlider != null)
+        {
+            sfxSlider.value = SoundsManager.Instance.sfxVolume;
+            sfxSlider.onValueChanged.AddListener(StageSelectSFXContoller);
+        }
 
         //웨이브 관련 정보 가져오기
 
@@ -64,18 +79,18 @@ public class UIPlaying : MonoBehaviour
 
     private void Update()//사실 업데이트가 여기서 할일은 아닌거같은 싱글톤에서 해야지
     {
-        if (isOver || !GameManager.Instance.isStageStarted)
+        /*if (isOver || !GameManager.Instance.isStageStarted)
         {
             return;
-        }
+        }*/
 
         // GameManager.Instance.timer += Time.deltaTime * GameManager.Instance.isGamePause;
-        //timerText.text = timer.ToString("F1") + Time.time.ToString("F1");//시간흐르는거확인용
+        timerText.text = GameManager.Instance.timer.ToString("F1") + Time.time.ToString("F1");//시간흐르는거확인용
 
-        if (!isWave)
-            WaveInfo();//웨이브 시작 전 
+        //if (!isWave)
+        //    WaveInfo();//웨이브 시작 전 
 
-        GameCleared();
+        //GameCleared();
         //여기에 체력과 골드 변화 조건 넣으면 됨
         //몬스터가 죽으면 골드를준다
         //몬스터가 성문에 도달하면 체력이 까인다
@@ -83,7 +98,17 @@ public class UIPlaying : MonoBehaviour
         //적이 다 죽어서 웨이브 끝나면 isWave = false;
     }
 
-    
+    public void StageSelectBGMController(float value)
+    {
+        SoundsManager.Instance.audioMixer.SetFloat("BGMParam", Mathf.Log10(value) * 20);
+        SoundsManager.Instance.bgmVolume = value;
+    }
+
+    public void StageSelectSFXContoller(float value)
+    {
+        SoundsManager.Instance.audioMixer.SetFloat("SFXParam", Mathf.Log10(value) * 20);
+        SoundsManager.Instance.sfxVolume = value;
+    }
 
 
     public void UpdateUI()//골드와 체력이 변할때마다 적용해야할 함수
@@ -104,12 +129,12 @@ public class UIPlaying : MonoBehaviour
     public void WaveStartClick()
     {
         WaveBtn.gameObject.SetActive(false);
-        waveLine.HidePath();
+        //waveLine.HidePath();
         isWave = true;
         currentWave = currentWave + 1;
         waveText.text = "WAVE : " + currentWave.ToString() + "/ 5";//5는 총 웨이브 변수로 바꿀것
     }
-    void GameCleared()
+    public void GameCleared()
     {
         if (currentWave > 5)// 게임 클리어했으면
         {
@@ -176,12 +201,12 @@ public class UIPlaying : MonoBehaviour
     {
         GameManager.Instance.isStageStarted = false;
         CameraController.OnCameraMoveDone -= StartGame;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneChangeManager.Instance.ReloadScene();
     }
 
     public void QuitClick()
     {
-        SceneManager.LoadScene("Menu");
+        SceneChangeManager.Instance.ChangeScene("TestingStageSelectScreen");
     }
 
     public void NextClick()

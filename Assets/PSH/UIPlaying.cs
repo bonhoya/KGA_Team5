@@ -26,13 +26,8 @@ public class UIPlaying : MonoBehaviour
     private bool isPaused = false;
     private bool isDoubled = false;
     private bool isOver = false;
-    private bool isGameStarted = false;
     private bool isWave = false;
 
-    private int gold = 100;
-
-    private float timer = 0f;
-    private int gamePause = 1;//이거 지워야할듯
     private int currentWave = 0;
 
     private void OnEnable()
@@ -42,7 +37,7 @@ public class UIPlaying : MonoBehaviour
     }
     private void StartGame()
     {
-        isGameStarted = true;
+        GameManager.Instance.isStageStarted = true;
         if (PopupStageInfo != null)
             PopupStageInfo.SetActive(false);
     }
@@ -69,13 +64,13 @@ public class UIPlaying : MonoBehaviour
 
     private void Update()//사실 업데이트가 여기서 할일은 아닌거같은 싱글톤에서 해야지
     {
-        if (isOver || !isGameStarted)
+        if (isOver || !GameManager.Instance.isStageStarted)
         {
             return;
         }
 
-        timer += Time.deltaTime * gamePause;
-        timerText.text = timer.ToString("F1") + Time.time.ToString("F1");//시간흐르는거확인용
+        // GameManager.Instance.timer += Time.deltaTime * GameManager.Instance.isGamePause;
+        //timerText.text = timer.ToString("F1") + Time.time.ToString("F1");//시간흐르는거확인용
 
         if (!isWave)
             WaveInfo();//웨이브 시작 전 
@@ -94,14 +89,14 @@ public class UIPlaying : MonoBehaviour
     public void UpdateUI()//골드와 체력이 변할때마다 적용해야할 함수
     {
         healthText.text = GameManager.Instance.playerLife.ToString();
-        goldText.text = gold.ToString();
+        goldText.text = GameManager.Instance.gold.ToString();
     }
 
     private void WaveInfo()//웨이브관련. 웨이브 시작 전에 표시할 함수
     {
         WaveBtn.gameObject.SetActive(true);
         //웨이브가 이방향으로 옵니다 표시
-        waveLine.DrawPath(1, 1);//몇스테이지 몇번째웨이브라는뜻
+        //waveLine.DrawPath(1, 1);//몇스테이지 몇번째웨이브라는뜻
                                 //표시할것들은 currentWave와 관련되게 배열쓰면 될듯
 
     }
@@ -119,21 +114,22 @@ public class UIPlaying : MonoBehaviour
         if (currentWave > 5)// 게임 클리어했으면
         {
             //게임멈추고 게임클리어 이미지를 열어
-            gamePause = 0;
+            GameManager.Instance.isGamePause = 0;
             Time.timeScale = 0;
             PopupWin.SetActive(true);
-            isOver = true;
             GameManager.Instance.playerLife = 20;
+            GameManager.Instance.gold = 100;
         }
 
         if (GameManager.Instance.playerLife <= 0)
         {
             //게임멈추고 게임오버 이미지를 열어
-            gamePause = 0;
+            GameManager.Instance.isGamePause = 0;
             Time.timeScale = 0;
             PopupLose.SetActive(true);
-            isOver = true;
+            GameManager.Instance.isGameOver = true;
             GameManager.Instance.playerLife = 20;
+            GameManager.Instance.gold = 100;
         }
 
     }
@@ -142,14 +138,14 @@ public class UIPlaying : MonoBehaviour
     {
         if (isPaused)
         {
-            gamePause = 1;
+            GameManager.Instance.isGamePause = 1;
             Time.timeScale = 1;
             isPaused = false;
             PopupPause.SetActive(false);
         }
         else
         {
-            gamePause = 0;
+            GameManager.Instance.isGamePause = 0;
             Time.timeScale = 0;
             isPaused = true;
             PopupPause.SetActive(true);
@@ -178,7 +174,7 @@ public class UIPlaying : MonoBehaviour
 
     public void RestartClick()
     {
-        isGameStarted = false;
+        GameManager.Instance.isStageStarted = false;
         CameraController.OnCameraMoveDone -= StartGame;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

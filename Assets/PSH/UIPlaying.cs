@@ -84,8 +84,8 @@ public class UIPlaying : MonoBehaviour
             return;
         }*/
 
-        // GameManager.Instance.timer += Time.deltaTime * GameManager.Instance.isGamePause;
-        timerText.text = GameManager.Instance.timer.ToString("F1") + Time.time.ToString("F1");//시간흐르는거확인용
+        //GameManager.Instance.timer += Time.deltaTime * GameManager.Instance.isGamePause;
+        //timerText.text = GameManager.Instance.timer.ToString("F1") + Time.time.ToString("F1");//시간흐르는거확인용
 
         //if (!isWave)
         //    WaveInfo();//웨이브 시작 전 
@@ -201,11 +201,13 @@ public class UIPlaying : MonoBehaviour
     {
         GameManager.Instance.isStageStarted = false;
         CameraController.OnCameraMoveDone -= StartGame;
+        GameManager.Instance.timer = 0f;
         SceneChangeManager.Instance.ReloadScene();
     }
 
     public void QuitClick()
     {
+        GameManager.Instance.timer = 0f;
         SceneChangeManager.Instance.ChangeScene("TestingStageSelectScreen");
     }
 

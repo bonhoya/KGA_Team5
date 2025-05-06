@@ -32,10 +32,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (isStageStarted == true)
+        /*if (isStageStarted == true)
         {
             timer += Time.deltaTime * isGamePause;
-        }
+        }*/
     }
 
     public void awakeState()

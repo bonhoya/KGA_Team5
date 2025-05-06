@@ -52,7 +52,7 @@ public class PlayerCameraController : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             Vector2 preMousePos = (Vector2)Input.mousePosition - inputMousePos;
-            Vector3 isMovedPos = new Vector3(-preMousePos.x, 0, -preMousePos.y);
+            Vector3 isMovedPos = new Vector3(preMousePos.x, 0, preMousePos.y);
             transform.Translate(isMovedPos * cameraMouseMoveSpeed * Time.deltaTime, Space.World);
 
             preMousePos = Input.mousePosition;

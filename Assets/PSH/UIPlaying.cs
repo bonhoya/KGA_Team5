@@ -175,12 +175,12 @@ public class UIPlaying : MonoBehaviour
     {
         GameManager.Instance.isStageStarted = false;
         CameraController.OnCameraMoveDone -= StartGame;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneChangeManager.Instance.RestartScene();
     }
 
     public void QuitClick()
     {
-        SceneManager.LoadScene("Menu");
+        SceneChangeManager.Instance.ChangeScene("TestingStageSelectScreen");
     }
 
     public void NextClick()

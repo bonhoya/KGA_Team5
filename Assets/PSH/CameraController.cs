@@ -21,8 +21,8 @@ public class CameraController : MonoBehaviour
         float duration = 2f; // 움직이는 데 걸리는 시간
         float elapsed = 0f;
 
-        Vector3 startRotation = new Vector3(-4f, -90f, 0f);
-        Vector3 endRotation = new Vector3(60f, -90f, 0f);
+        Vector3 startRotation = new Vector3(20f, 0f, 0f);
+        Vector3 endRotation = new Vector3(45f, 0f, 0f);
 
         Vector2 startPos = new Vector3(0, 300);
         Vector2 endPos = new Vector3(0, 0);

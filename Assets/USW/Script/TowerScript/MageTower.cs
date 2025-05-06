@@ -15,15 +15,11 @@ public class MageTower : Tower
     {
         attackPower = 10f;
         range = 10f;
-        attackSpeed = 3f; 
+        attackSpeed = 10f; 
     }
     
 
-    void Update()
-    {
-        Debug.Log("World Position: " + transform.position);
-        Debug.Log("Local Position: " + transform.localPosition);
-    }
+
 
 
     protected override void Attack()

@@ -46,6 +46,12 @@ public class UIPlaying : MonoBehaviour
     {
         CameraController.OnCameraMoveDone += StartGame;
         StartCoroutine(DelayStartCamera());
+        GameManager.Instance.OnPlayerLifeZero += IsFailedStage;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnPlayerLifeZero -= IsFailedStage;
     }
     private void StartGame()
     {
@@ -86,7 +92,7 @@ public class UIPlaying : MonoBehaviour
 
     }
 
-    private void Update()//��� ������Ʈ�� ���⼭ ������ �ƴѰŰ��� �̱��濡�� �ؾ���
+    /*private void Update()//��� ������Ʈ�� ���⼭ ������ �ƴѰŰ��� �̱��濡�� �ؾ���
     {
         if (isOver || !GameManager.Instance.isStageStarted)
         {
@@ -105,10 +111,7 @@ public class UIPlaying : MonoBehaviour
         //���Ͱ� ������ �����ϸ� ü���� ���δ�
 
         //���� �� �׾ ���̺� ������ isWave = false;
-    }
-
-
-
+    }*/
 
     public void UpdateUI()//���� ü���� ���Ҷ����� �����ؾ��� �Լ�
     {
@@ -154,6 +157,12 @@ public class UIPlaying : MonoBehaviour
            
         }
 
+    }
+
+    private void IsFailedStage()
+    {
+        SoundsManager.Instance.SFXPlay("Fail", StageFailClip);
+        PopupLose.SetActive(true);
     }
 
     public void PauseButtonClick()

@@ -61665,7 +61665,7 @@ MonoBehaviour:
   SelectMenuClip: {fileID: 8300000, guid: ef646793e309a7040b0ad4e9fc224f2f, type: 3}
   StartStageClip: {fileID: 8300000, guid: eba2e61a280b9d04696e291c6c8a5d97, type: 3}
   StageClearClip: {fileID: 0}
-  StageFailClip: {fileID: 0}
+  StageFailClip: {fileID: 8300000, guid: d1c13eafb8a4c02428841c13aafa3ec0, type: 3}
 --- !u!4 &1261578099
 Transform:
   m_ObjectHideFlags: 0
@@ -63966,6 +63966,7 @@ MonoBehaviour:
   isClearedStageThr: 0
   timer: 0
   isStageStarted: 0
+  TakeDamageClip: {fileID: 0}
 --- !u!4 &1480560856
 Transform:
   m_ObjectHideFlags: 0

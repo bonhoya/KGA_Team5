@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     [Header("SFX Setting")]
     [SerializeField] private AudioClip TakeDamageClip;
 
+    // 체력이 0이 되었을 때 발생하는 이벤트
+    public event Action OnPlayerLifeZero;
+
     private void Awake()
     {
         if (Instance == null)
@@ -61,6 +64,8 @@ public class GameManager : MonoBehaviour
             playerLife = 0;
 
             isGameOver = true;
+
+            OnPlayerLifeZero?.Invoke();
 
         }
     }

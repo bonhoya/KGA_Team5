@@ -23,6 +23,16 @@ public class UIPlaying : MonoBehaviour
 
     public WaveLine waveLine;
 
+    [Header("Saved Volume_Value")]
+    [SerializeField] private Slider bgmSlider;
+    [SerializeField] private Slider sfxSlider;
+
+    [Header("SFX Setting")]
+    [SerializeField] private AudioClip SelectMenuClip;
+    [SerializeField] private AudioClip StartStageClip;
+    [SerializeField] private AudioClip StageClearClip;
+    [SerializeField] private AudioClip StageFailClip;
+
     private bool isPaused = false;
     private bool isDoubled = false;
     private bool isOver = false;
@@ -36,6 +46,12 @@ public class UIPlaying : MonoBehaviour
     {
         CameraController.OnCameraMoveDone += StartGame;
         StartCoroutine(DelayStartCamera());
+        GameManager.Instance.OnPlayerLifeZero += IsFailedStage;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnPlayerLifeZero -= IsFailedStage;
     }
     private void StartGame()
     {
@@ -59,12 +75,24 @@ public class UIPlaying : MonoBehaviour
 
         UpdateUI();
 
+        // 저장된 볼륨 설정을 다른곳에서도 유지할 수 있도록 하는 코드
+        if (bgmSlider != null)
+        {
+            bgmSlider.value = SoundsManager.Instance.bgmVolume;
+            bgmSlider.onValueChanged.AddListener(StageSelectBGMController);
+        }
+
+        if (sfxSlider != null)
+        {
+            sfxSlider.value = SoundsManager.Instance.sfxVolume;
+            sfxSlider.onValueChanged.AddListener(StageSelectSFXContoller);
+        }
 
         //���̺� ���� ���� ��������
 
     }
 
-    private void Update()//��� ������Ʈ�� ���⼭ ������ �ƴѰŰ��� �̱��濡�� �ؾ���
+    /*private void Update()//��� ������Ʈ�� ���⼭ ������ �ƴѰŰ��� �̱��濡�� �ؾ���
     {
         if (isOver || !GameManager.Instance.isStageStarted)
         {
@@ -83,10 +111,7 @@ public class UIPlaying : MonoBehaviour
         //���Ͱ� ������ �����ϸ� ü���� ���δ�
 
         //���� �� �׾ ���̺� ������ isWave = false;
-    }
-
-
-
+    }*/
 
     public void UpdateUI()//���� ü���� ���Ҷ����� �����ؾ��� �Լ�
     {
@@ -104,6 +129,7 @@ public class UIPlaying : MonoBehaviour
 
     public void WaveStartClick()
     {
+        SoundsManager.Instance.SFXPlay("Select", StartStageClip);
         WaveBtn.gameObject.SetActive(false);
         waveLine.HidePath();
         isWave = true;
@@ -133,11 +159,18 @@ public class UIPlaying : MonoBehaviour
 
     }
 
+    private void IsFailedStage()
+    {
+        SoundsManager.Instance.SFXPlay("Fail", StageFailClip);
+        PopupLose.SetActive(true);
+    }
+
     public void PauseButtonClick()
     {
+        SoundsManager.Instance.SFXPlay("Select", SelectMenuClip);
         if (isPaused)
         {
-      
+
             Time.timeScale = 1;
             isPaused = false;
             PopupPause.SetActive(false);
@@ -173,14 +206,16 @@ public class UIPlaying : MonoBehaviour
 
     public void RestartClick()
     {
+        SoundsManager.Instance.SFXPlay("Select", SelectMenuClip);
         GameManager.Instance.isStageStarted = false;
         CameraController.OnCameraMoveDone -= StartGame;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneChangeManager.Instance.RestartScene();
     }
 
     public void QuitClick()
     {
-        SceneManager.LoadScene("Menu");
+        SoundsManager.Instance.SFXPlay("Select", SelectMenuClip);
+        SceneChangeManager.Instance.ChangeScene("TestingStageSelectScreen");
     }
 
     public void NextClick()
@@ -188,5 +223,16 @@ public class UIPlaying : MonoBehaviour
         //������������ ��¼��
     }
 
+    public void StageSelectBGMController(float value)
+    {
+        SoundsManager.Instance.audioMixer.SetFloat("BGMParam", Mathf.Log10(value) * 20);
+        SoundsManager.Instance.bgmVolume = value;
+    }
+
+    public void StageSelectSFXContoller(float value)
+    {
+        SoundsManager.Instance.audioMixer.SetFloat("SFXParam", Mathf.Log10(value) * 20);
+        SoundsManager.Instance.sfxVolume = value;
+    }
 
 }

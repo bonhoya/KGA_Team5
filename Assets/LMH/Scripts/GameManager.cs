@@ -38,10 +38,6 @@ public class GameManager : MonoBehaviour
     public void awakeState()
     {
         isGameOver = false;
-        isClearedStageOne = false;
-        isClearedStageTwo = false;
-        isClearedStageThr = false;
-        timer = 0f;
     }
 
 

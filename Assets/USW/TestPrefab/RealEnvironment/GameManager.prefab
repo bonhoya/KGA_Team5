@@ -44,4 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b6e6b77f89c8e41a8d72d687a76868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLife: 10
+  playerLife: 20
+  gold: 100
+  isGameOver: 0
+  isClearedStageOne: 0
+  isClearedStageTwo: 0
+  isClearedStageThr: 0
+  timer: 0
+  isStageStarted: 0

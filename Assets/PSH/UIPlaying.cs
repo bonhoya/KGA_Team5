@@ -23,6 +23,10 @@ public class UIPlaying : MonoBehaviour
 
     public WaveLine waveLine;
 
+    [Header("Saved Volume_Value")]
+    [SerializeField] private Slider bgmSlider;
+    [SerializeField] private Slider sfxSlider;
+
     private bool isPaused = false;
     private bool isDoubled = false;
     private bool isOver = false;
@@ -59,6 +63,18 @@ public class UIPlaying : MonoBehaviour
 
         UpdateUI();
 
+        // 저장된 볼륨 설정을 다른곳에서도 유지할 수 있도록 하는 코드
+        if (bgmSlider != null)
+        {
+            bgmSlider.value = SoundsManager.Instance.bgmVolume;
+            bgmSlider.onValueChanged.AddListener(StageSelectBGMController);
+        }
+
+        if (sfxSlider != null)
+        {
+            sfxSlider.value = SoundsManager.Instance.sfxVolume;
+            sfxSlider.onValueChanged.AddListener(StageSelectSFXContoller);
+        }
 
         //���̺� ���� ���� ��������
 
@@ -188,5 +204,16 @@ public class UIPlaying : MonoBehaviour
         //������������ ��¼��
     }
 
+    public void StageSelectBGMController(float value)
+    {
+        SoundsManager.Instance.audioMixer.SetFloat("BGMParam", Mathf.Log10(value) * 20);
+        SoundsManager.Instance.bgmVolume = value;
+    }
+
+    public void StageSelectSFXContoller(float value)
+    {
+        SoundsManager.Instance.audioMixer.SetFloat("SFXParam", Mathf.Log10(value) * 20);
+        SoundsManager.Instance.sfxVolume = value;
+    }
 
 }

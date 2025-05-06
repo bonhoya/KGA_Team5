@@ -5,14 +5,10 @@ using UnityEngine;
 public class MageTower : Tower
 {
     [Header("마법 타워 전용 설정")]
-    [SerializeField] private GameObject magicPrefab;  // 마법 투사체 프리팹
-    [SerializeField] private Transform firePoint;     // 발사 위치
-    
-    private Coroutine fireCoroutine;
-    private YieldInstruction fireDelay;
+    [SerializeField] private GameObject magicPrefab;
+    [SerializeField] private Transform firePoint;
 
-    private float attackCooldown = 0f;
-
+    private float nextAttackTime = 0f; // 다음 공격 가능한 시간
 
     private void OnDrawGizmos()
     {
@@ -20,27 +16,26 @@ public class MageTower : Tower
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-
-    private IEnumerator FireCoroutine()
-    {
-        yield return fireDelay;
-    }
-
-
-
     void Update()
     {
-        base.Update();
-
-        if (attackCooldown > 0)
-        {
-            attackCooldown -= Time.deltaTime;
-        }
+        base.Update(); // 부모 클래스에서 FindEnemy() 호출됨
     }
 
     protected override void Attack()
     {
-        GameObject energyBall = Instantiate(magicPrefab, firePoint.position, Quaternion.identity);
+        if (Time.time < nextAttackTime) return;
+
+        GameObject energyBall = EnergyBallPool.Instance.GetFromPool();
+        if (energyBall == null) return;
+
+        energyBall.transform.position = firePoint.position;
+        energyBall.transform.rotation = Quaternion.identity;
+
+        // 다음 공격 가능 시간 계산 (1초 / 초당 공격 횟수)
+        if (attackSpeed > 0f)
+            nextAttackTime = Time.time + (1f / attackSpeed);
+        else
+            nextAttackTime = Time.time + 1f; // 혹시 0일 경우 대비
     }
 
     protected override void Upgrade()
@@ -50,5 +45,5 @@ public class MageTower : Tower
         attackSpeed += 0.2f;
         Debug.Log("업글");
     }
-
 }
+

@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class EnergyBall : MonoBehaviour
 {
-    [SerializeField] private Rigidbody rigid;
-    [SerializeField] private float energySpeed;
+    private float lifeTime = 2f;
 
     private void OnEnable()
     {
-        rigid.AddForce(transform.forward * energySpeed, ForceMode.Impulse);
+        Invoke(nameof(ReturnToPool), lifeTime);
+    }
+
+    private void ReturnToPool()
+    {
+        EnergyBallPool.Instance.ReturnToPool(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke(); // 혹시 중복 방지
     }
 }
+

@@ -29,6 +29,8 @@ public class UIPlaying : MonoBehaviour
     private bool isWave = false;
 
     private int currentWave = 0;
+    // 1/5 
+    // 3 waves 
 
     private void OnEnable()
     {
@@ -58,11 +60,11 @@ public class UIPlaying : MonoBehaviour
         UpdateUI();
 
 
-        //¿þÀÌºê °ü·Ã Á¤º¸ °¡Á®¿À±â
+        //ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     }
 
-    private void Update()//»ç½Ç ¾÷µ¥ÀÌÆ®°¡ ¿©±â¼­ ÇÒÀÏÀº ¾Æ´Ñ°Å°°Àº ½Ì±ÛÅæ¿¡¼­ ÇØ¾ßÁö
+    private void Update()//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ñ°Å°ï¿½ï¿½ï¿½ ï¿½Ì±ï¿½ï¿½æ¿¡ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½ï¿½
     {
         if (isOver || !GameManager.Instance.isStageStarted)
         {
@@ -70,35 +72,34 @@ public class UIPlaying : MonoBehaviour
         }
 
         // GameManager.Instance.timer += Time.deltaTime * GameManager.Instance.isGamePause;
-        //timerText.text = timer.ToString("F1") + Time.time.ToString("F1");//½Ã°£Èå¸£´Â°ÅÈ®ÀÎ¿ë
+        //timerText.text = timer.ToString("F1") + Time.time.ToString("F1");//ï¿½Ã°ï¿½ï¿½å¸£ï¿½Â°ï¿½È®ï¿½Î¿ï¿½
 
         if (!isWave)
-            WaveInfo();//¿þÀÌºê ½ÃÀÛ Àü 
+            WaveInfo();//ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 
 
         GameCleared();
-        //¿©±â¿¡ Ã¼·Â°ú °ñµå º¯È­ Á¶°Ç ³ÖÀ¸¸é µÊ
-        //¸ó½ºÅÍ°¡ Á×À¸¸é °ñµå¸¦ÁØ´Ù
-        //¸ó½ºÅÍ°¡ ¼º¹®¿¡ µµ´ÞÇÏ¸é Ã¼·ÂÀÌ ±îÀÎ´Ù
+        //ï¿½ï¿½ï¿½â¿¡ Ã¼ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+        //ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½å¸¦ï¿½Ø´ï¿½
+        //ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½
 
-        //ÀûÀÌ ´Ù Á×¾î¼­ ¿þÀÌºê ³¡³ª¸é isWave = false;
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½×¾î¼­ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ isWave = false;
     }
 
 
 
 
-    public void UpdateUI()//°ñµå¿Í Ã¼·ÂÀÌ º¯ÇÒ¶§¸¶´Ù Àû¿ëÇØ¾ßÇÒ ÇÔ¼ö
+    public void UpdateUI()//ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     {
         healthText.text = GameManager.Instance.playerLife.ToString();
         goldText.text = GameManager.Instance.gold.ToString();
     }
 
-    private void WaveInfo()//¿þÀÌºê°ü·Ã. ¿þÀÌºê ½ÃÀÛ Àü¿¡ Ç¥½ÃÇÒ ÇÔ¼ö
+    private void WaveInfo()//ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     {
         WaveBtn.gameObject.SetActive(true);
-        //¿þÀÌºê°¡ ÀÌ¹æÇâÀ¸·Î ¿É´Ï´Ù Ç¥½Ã
-        //waveLine.DrawPath(1, 1);//¸î½ºÅ×ÀÌÁö ¸î¹øÂ°¿þÀÌºê¶ó´Â¶æ
-                                //Ç¥½ÃÇÒ°ÍµéÀº currentWave¿Í °ü·ÃµÇ°Ô ¹è¿­¾²¸é µÉµí
-
+        //ï¿½ï¿½ï¿½Ìºê°¡ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½É´Ï´ï¿½ Ç¥ï¿½ï¿½
+        //waveLine.DrawPath(1, 1);//ï¿½î½ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ï¿½ï¿½Ìºï¿½ï¿½Â¶ï¿½
+                                //Ç¥ï¿½ï¿½ï¿½Ò°Íµï¿½ï¿½ï¿½ currentWaveï¿½ï¿½ ï¿½ï¿½ï¿½ÃµÇ°ï¿½ ï¿½è¿­ï¿½ï¿½ï¿½ï¿½ ï¿½Éµï¿½
     }
 
     public void WaveStartClick()
@@ -107,29 +108,27 @@ public class UIPlaying : MonoBehaviour
         waveLine.HidePath();
         isWave = true;
         currentWave = currentWave + 1;
-        waveText.text = "WAVE : " + currentWave.ToString() + "/ 5";//5´Â ÃÑ ¿þÀÌºê º¯¼ö·Î ¹Ù²Ü°Í
+        waveText.text = "WAVE : " + currentWave.ToString() + "/ 5";//5ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ü°ï¿½
     }
     void GameCleared()
     {
-        if (currentWave > 5)// °ÔÀÓ Å¬¸®¾îÇßÀ¸¸é
+        if (currentWave > 5)// ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
-            //°ÔÀÓ¸ØÃß°í °ÔÀÓÅ¬¸®¾î ÀÌ¹ÌÁö¸¦ ¿­¾î
-            GameManager.Instance.isGamePause = 0;
+            //ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            
             Time.timeScale = 0;
             PopupWin.SetActive(true);
-            GameManager.Instance.playerLife = 20;
-            GameManager.Instance.gold = 100;
+        
         }
 
         if (GameManager.Instance.playerLife <= 0)
         {
-            //°ÔÀÓ¸ØÃß°í °ÔÀÓ¿À¹ö ÀÌ¹ÌÁö¸¦ ¿­¾î
-            GameManager.Instance.isGamePause = 0;
+            //ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ß°ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+       
             Time.timeScale = 0;
             PopupLose.SetActive(true);
             GameManager.Instance.isGameOver = true;
-            GameManager.Instance.playerLife = 20;
-            GameManager.Instance.gold = 100;
+           
         }
 
     }
@@ -138,14 +137,14 @@ public class UIPlaying : MonoBehaviour
     {
         if (isPaused)
         {
-            GameManager.Instance.isGamePause = 1;
+      
             Time.timeScale = 1;
             isPaused = false;
             PopupPause.SetActive(false);
         }
         else
         {
-            GameManager.Instance.isGamePause = 0;
+           
             Time.timeScale = 0;
             isPaused = true;
             PopupPause.SetActive(true);
@@ -186,7 +185,7 @@ public class UIPlaying : MonoBehaviour
 
     public void NextClick()
     {
-        //´ÙÀ½½ºÅ×ÀÌÁö ¾îÂ¼°í
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¼ï¿½ï¿½
     }
 
 

@@ -15,7 +15,7 @@ public class ArcherTower : Tower
     {
         attackPower = 10f;
         range = 10f;
-        attackSpeed = 2f;
+        attackSpeed = 10f;
     }
     // 어택타이머는 그치 타워에 두는게 맞지 
     // 일단 레이어로 퉁쳤으니깐 화살에도 그러면 ? 태그가 아닌 레이어에 두는게 맞지 신원아.
@@ -43,10 +43,18 @@ public class ArcherTower : Tower
                         currentTarget.GetComponent<Enemy>().defense);
 
                 GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+                
+                ArcherTowerArrow arrow = projectile.GetComponent<ArcherTowerArrow>();
+                if (arrow != null)
+                {
+                    arrow.Init(currentTarget,attackSpeed,attackPower);
+                }
 
-
+                attackTimer = 0f;
             }
         }
+
+        
     }
 
     protected override void Upgrade()

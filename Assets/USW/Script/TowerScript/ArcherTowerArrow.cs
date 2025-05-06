@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,13 +18,37 @@ public class ArcherTowerArrow : MonoBehaviour
     
     // 그럼 포물선, 적레이어 , 데미지 , 속도 , 목표 , 또 필요한게 있나 ?  
 
+
+    private void Awake()
+    {
+        arrowRb = GetComponent<Rigidbody>();
+      
+    }
+
     public void Init(Transform target, float arrowSpeed, float damage)
     {
         this.target = target;
         this.damage = damage;
         this.arrowSpeed = arrowSpeed;
-        arrowRb = GetComponent<Rigidbody>();
+        
+       /* if (target != null && arrowRb != null)
+        {
+            Vector3 direction = (target.position - transform.position).normalized;
+            arrowRb.velocity = direction * arrowSpeed;
+            
+            
+            // 임펄스를 여기에다가 안줘도 되나 ? 아니지 어쩌피 초기설정이니깐 ? 
+            // 
+            //방향을 설정 해야하는데
+            // 타겟하고 화살속도는 정해놨고 
+            // 어쩌피 레이어 가져와서 적구분  할꺼니깐 
+            
+        }
+        */
+    }
 
+    private void FixedUpdate()
+    {
         if (target != null && arrowRb != null)
         {
             Vector3 direction = (target.position - transform.position).normalized;
@@ -39,7 +64,6 @@ public class ArcherTowerArrow : MonoBehaviour
         }
     }
 
-   
 
     // Update is called once per frame
     void Update()

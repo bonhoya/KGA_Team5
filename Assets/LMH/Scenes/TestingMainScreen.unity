@@ -5243,6 +5243,7 @@ MonoBehaviour:
   isClearedStageThr: 0
   timer: 0
   isStageStarted: 0
+  TakeDamageClip: {fileID: 8300000, guid: 1e041f81813d4384487ca6815d8e0918, type: 3}
 --- !u!4 &1667738705
 Transform:
   m_ObjectHideFlags: 0

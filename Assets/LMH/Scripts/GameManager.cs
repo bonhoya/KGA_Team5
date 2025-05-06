@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] public float timer;
     [SerializeField] public bool isStageStarted;
 
+    [Header("SFX Setting")]
+    [SerializeField] private AudioClip TakeDamageClip;
+
     private void Awake()
     {
         if (Instance == null)
@@ -29,12 +32,10 @@ public class GameManager : MonoBehaviour
         awakeState();
 
     }
-
     private void Update()
     {
-      
+        
     }
-
     public void awakeState()
     {
         isGameOver = false;
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
     public void PlayerTakeDamage(int damage)
     {
         playerLife -= damage;
+        SoundsManager.Instance.SFXPlay("Select", TakeDamageClip);
         if (playerLife <= 0)
         {
             // 플레이어의 체력이 0이 되면 게임오버가 진행되고

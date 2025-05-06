@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public bool isClearedStageThr;
     [SerializeField] public float timer;
     [SerializeField] public bool isStageStarted;
-    [SerializeField] public int isGamePause = 1;
+
     private void Awake()
     {
         if (Instance == null)
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else Destroy(this);
+        else Destroy(gameObject);
 
         awakeState();
 
@@ -32,10 +32,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (isStageStarted == true)
-        {
-            timer += Time.deltaTime * isGamePause;
-        }
+      
     }
 
     public void awakeState()
@@ -44,7 +41,6 @@ public class GameManager : MonoBehaviour
         isClearedStageOne = false;
         isClearedStageTwo = false;
         isClearedStageThr = false;
-        isStageStarted = false;
         timer = 0f;
     }
 
@@ -63,7 +59,6 @@ public class GameManager : MonoBehaviour
             playerLife = 0;
 
             isGameOver = true;
-            Debug.Log("Player life has been destroyed");
 
         }
     }

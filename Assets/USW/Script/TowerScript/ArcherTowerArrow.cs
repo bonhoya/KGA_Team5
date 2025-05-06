@@ -79,20 +79,17 @@ public class ArcherTowerArrow : MonoBehaviour
         // 업그레이드 티어에다가 두는게 맞을뿐더러 시간이 없다 신원아
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-
-        if (collision.gameObject.layer == 6)
+        
+        if (other.gameObject.layer == 6)
         {
-
-            Enemy newEnemy = GetComponent<Enemy>();
-            
+            Enemy newEnemy = other.gameObject.GetComponent<Enemy>();
             if (newEnemy != null)
             {
                 newEnemy.TakePhysicalDamage(damage);
             }
             Destroy(gameObject);
         }
-       
     }
 }

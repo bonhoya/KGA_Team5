@@ -33,10 +33,6 @@ public class SoundsManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        
-    }
     // 기본적으로 출력하는 배경음악
     public void backGroundMusicPlay(AudioClip cilp)
     {

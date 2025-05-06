@@ -12,6 +12,9 @@ public class PlayerCameraController : MonoBehaviour
     [Header("ZoomLimit")]
     [SerializeField] private float cameraZoomInLimit;
     [SerializeField] private float cameraZoomOutLimit;
+
+    [Header("SFX Setting")]
+    [SerializeField] private AudioClip SelectStageClip;
     private Vector3 inputKeyPos;
     private Vector2 inputMousePos;
     private Vector3 hitRayPos;
@@ -28,6 +31,7 @@ public class PlayerCameraController : MonoBehaviour
         DetectCamera();
         if (hitTarget == "Stage4")
         {
+            SoundsManager.Instance.SFXPlay("Select", SelectStageClip);
             SceneChangeManager.Instance.ChangeScene("TestBossScene");
         }
     }

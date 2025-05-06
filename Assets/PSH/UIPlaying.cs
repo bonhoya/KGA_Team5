@@ -27,6 +27,12 @@ public class UIPlaying : MonoBehaviour
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
 
+    [Header("SFX Setting")]
+    [SerializeField] private AudioClip SelectMenuClip;
+    [SerializeField] private AudioClip StartStageClip;
+    [SerializeField] private AudioClip StageClearClip;
+    [SerializeField] private AudioClip StageFailClip;
+
     private bool isPaused = false;
     private bool isDoubled = false;
     private bool isOver = false;
@@ -120,6 +126,7 @@ public class UIPlaying : MonoBehaviour
 
     public void WaveStartClick()
     {
+        SoundsManager.Instance.SFXPlay("Select", StartStageClip);
         WaveBtn.gameObject.SetActive(false);
         waveLine.HidePath();
         isWave = true;
@@ -151,9 +158,10 @@ public class UIPlaying : MonoBehaviour
 
     public void PauseButtonClick()
     {
+        SoundsManager.Instance.SFXPlay("Select", SelectMenuClip);
         if (isPaused)
         {
-      
+
             Time.timeScale = 1;
             isPaused = false;
             PopupPause.SetActive(false);
@@ -189,6 +197,7 @@ public class UIPlaying : MonoBehaviour
 
     public void RestartClick()
     {
+        SoundsManager.Instance.SFXPlay("Select", SelectMenuClip);
         GameManager.Instance.isStageStarted = false;
         CameraController.OnCameraMoveDone -= StartGame;
         SceneChangeManager.Instance.RestartScene();
@@ -196,6 +205,7 @@ public class UIPlaying : MonoBehaviour
 
     public void QuitClick()
     {
+        SoundsManager.Instance.SFXPlay("Select", SelectMenuClip);
         SceneChangeManager.Instance.ChangeScene("TestingStageSelectScreen");
     }
 

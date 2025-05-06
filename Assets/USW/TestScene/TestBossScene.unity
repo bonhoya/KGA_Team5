@@ -61662,6 +61662,10 @@ MonoBehaviour:
   waveLine: {fileID: 0}
   bgmSlider: {fileID: 1017567232}
   sfxSlider: {fileID: 655136047}
+  SelectMenuClip: {fileID: 8300000, guid: ef646793e309a7040b0ad4e9fc224f2f, type: 3}
+  StartStageClip: {fileID: 8300000, guid: eba2e61a280b9d04696e291c6c8a5d97, type: 3}
+  StageClearClip: {fileID: 0}
+  StageFailClip: {fileID: 0}
 --- !u!4 &1261578099
 Transform:
   m_ObjectHideFlags: 0
@@ -66515,6 +66519,7 @@ MonoBehaviour:
   cameraMouseMoveSpeed: 0.01
   cameraZoomInLimit: 15
   cameraZoomOutLimit: 45
+  SelectStageClip: {fileID: 0}
 --- !u!114 &1661410242
 MonoBehaviour:
   m_ObjectHideFlags: 0

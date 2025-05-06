@@ -13,6 +13,9 @@ public class StageSelectUI : MonoBehaviour
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
 
+    [Header("SFX Setting")]
+    [SerializeField] private AudioClip SelectMenuButtonClip;
+
     private void Awake()
     {
         settingUIPanel.SetActive(false);
@@ -32,16 +35,19 @@ public class StageSelectUI : MonoBehaviour
     }
     public void OpenSetting()
     {
+        SoundsManager.Instance.SFXPlay("Select", SelectMenuButtonClip);
         settingUIPanel.SetActive(true);
     }
 
    public void Resume()
     {
+        SoundsManager.Instance.SFXPlay("Select", SelectMenuButtonClip);
         settingUIPanel.SetActive(false);
     }
 
     public void Quit()
     {
+        SoundsManager.Instance.SFXPlay("Select", SelectMenuButtonClip);
         SceneChangeManager.Instance.ChangeScene("TestingMainScreen");
         settingUIPanel.SetActive(false);
     }

@@ -2,17 +2,19 @@ using UnityEngine;
 
 public class PlayerCameraController : MonoBehaviour
 {
-    [Header("Camera Speed Adjust")]
+    [Header("Camera Setting")]
     [SerializeField] private Camera mainCamera;
 
     [Header("Camera Speed Adjust")]
     [SerializeField] private float cameraMoveSpeed;
     [SerializeField] private float cameraMouseMoveSpeed;
-    [SerializeField] private float cameraMouseZoomSpeed;
 
     [Header("ZoomLimit")]
     [SerializeField] private float cameraZoomInLimit;
     [SerializeField] private float cameraZoomOutLimit;
+
+    [Header("SFX Setting")]
+    [SerializeField] private AudioClip SelectStageClip;
     private Vector3 inputKeyPos;
     private Vector2 inputMousePos;
     private Vector3 hitRayPos;
@@ -27,9 +29,10 @@ public class PlayerCameraController : MonoBehaviour
         MouseMove();
         MouseZoomInOut();
         DetectCamera();
-        if (hitTarget == "Stage1")
+        if (hitTarget == "Stage4")
         {
-            SceneChangeManager.Instance.ChangeScene("Map1");
+            SoundsManager.Instance.SFXPlay("Select", SelectStageClip);
+            SceneChangeManager.Instance.ChangeScene("TestBossScene");
         }
     }
 

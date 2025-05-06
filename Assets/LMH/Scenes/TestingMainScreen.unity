@@ -377,6 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486e7ae7d737e3a44abbe137f048015f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectMenuButtonClip: {fileID: 8300000, guid: ef646793e309a7040b0ad4e9fc224f2f, type: 3}
 --- !u!1001 &95946841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2561,6 +2562,7 @@ MonoBehaviour:
   bgmlist:
   - {fileID: 8300000, guid: 470544d826c66474292cba7d3aa87ef3, type: 3}
   - {fileID: 8300000, guid: d9544df379cbbaf46ad61885fd078234, type: 3}
+  - {fileID: 8300000, guid: 1ad5a1c73a643024b891b1b7efaa95e5, type: 3}
   audioMixer: {fileID: 24100000, guid: 403783044fe37374eb880296d1af37ed, type: 2}
   bgmVolume: 1
   sfxVolume: 1
@@ -5241,7 +5243,7 @@ MonoBehaviour:
   isClearedStageThr: 0
   timer: 0
   isStageStarted: 0
-  isGamePause: 0
+  TakeDamageClip: {fileID: 8300000, guid: 1e041f81813d4384487ca6815d8e0918, type: 3}
 --- !u!4 &1667738705
 Transform:
   m_ObjectHideFlags: 0

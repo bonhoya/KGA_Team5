@@ -553,6 +553,7 @@ MonoBehaviour:
   settingUIPanel: {fileID: 902124022}
   bgmSlider: {fileID: 1756905945}
   sfxSlider: {fileID: 403548629}
+  SelectMenuButtonClip: {fileID: 8300000, guid: ef646793e309a7040b0ad4e9fc224f2f, type: 3}
 --- !u!1 &69309226
 GameObject:
   m_ObjectHideFlags: 0
@@ -2431,9 +2432,9 @@ MonoBehaviour:
   mainCamera: {fileID: 591012311}
   cameraMoveSpeed: 0
   cameraMouseMoveSpeed: 0
-  cameraMouseZoomSpeed: 0
   cameraZoomInLimit: 40
   cameraZoomOutLimit: 60
+  SelectStageClip: {fileID: 8300000, guid: ef646793e309a7040b0ad4e9fc224f2f, type: 3}
 --- !u!1 &648922482
 GameObject:
   m_ObjectHideFlags: 0

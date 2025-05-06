@@ -6,10 +6,17 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public int playerLife = 10;
+    public int playerLife = 20;
+    public int gold = 100;
 
     [Header("GameState")]
-    private bool isGameOver;
+    [SerializeField] public bool isGameOver;
+    [SerializeField] public bool isClearedStageOne;
+    [SerializeField] public bool isClearedStageTwo;
+    [SerializeField] public bool isClearedStageThr;
+    [SerializeField] public float timer;
+    [SerializeField] public bool isStageStarted;
+    [SerializeField] public int isGamePause = 1;
     private void Awake()
     {
         if (Instance == null)
@@ -19,9 +26,27 @@ public class GameManager : MonoBehaviour
         }
         else Destroy(this);
 
-        isGameOver = false;
+        awakeState();
+
     }
 
+    private void Update()
+    {
+        if (isStageStarted == true)
+        {
+            timer += Time.deltaTime * isGamePause;
+        }
+    }
+
+    public void awakeState()
+    {
+        isGameOver = false;
+        isClearedStageOne = false;
+        isClearedStageTwo = false;
+        isClearedStageThr = false;
+        isStageStarted = false;
+        timer = 0f;
+    }
 
 
     /// <summary>
@@ -88,5 +113,10 @@ public class GameManager : MonoBehaviour
    //- Enemy는 defense, magicResist로 방어력을 통일
    //- 퍼센트 경감 방식이므로 defense/magicResist 값은 0~1 사이로 설정
    //-------------------------------------------
+
+    public void gameOver()
+    {
+
+    }
 }
 

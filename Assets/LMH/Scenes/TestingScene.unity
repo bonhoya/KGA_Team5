@@ -1470,6 +1470,8 @@ MonoBehaviour:
   bgmlist:
   - {fileID: 8300000, guid: de55399a86c1d174bb2ade9b06650adc, type: 3}
   audioMixer: {fileID: 24100000, guid: 403783044fe37374eb880296d1af37ed, type: 2}
+  bgmVolume: 1
+  sfxVolume: 1
 --- !u!4 &1048420170
 Transform:
   m_ObjectHideFlags: 0

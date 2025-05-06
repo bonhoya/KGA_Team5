@@ -6,12 +6,19 @@ public class BuildPoint : MonoBehaviour
 {
     public GameObject buildUI;
     public GameObject manageUI;
+    public GameObject goldAlert;
     private Transform spawnPoint;
 
     private GameObject currentTower;
     private int a;//현재 선택중인 ui가 빈공간인지 buildUI인지 manageUI인지 구분하기위함 0, 1, 2
 
-    public GameObject testprefab;
+    //타워별배열
+    public GameObject[] tower1;
+    public GameObject[] tower2;
+    public GameObject[] tower3;
+
+    private int towerType = 0;
+    private int towerLevel = 0;
 
     private void Awake()
     {
@@ -34,15 +41,14 @@ public class BuildPoint : MonoBehaviour
                 CloseAllUI();
                 a = 0;
             }
-
-
         }
-
     }
 
     private void OnMouseDown()
     {
         if (Time.timeScale == 0f)//일시정지때는 작동 안하게
+            return;
+        if (EventSystem.current.IsPointerOverGameObject())
             return;
 
         if (currentTower == null)
@@ -106,36 +112,64 @@ public class BuildPoint : MonoBehaviour
         StartCoroutine(ScaleDownCoroutine(buildUI));
         StartCoroutine(ScaleDownCoroutine(manageUI));
     }
-    public void CloseAllUI(int n)
+
+    public void BuildTower(int n)//n에 따라 타워 건설하기
     {
+        towerType = n;
+        towerLevel = 0;
+
+        /*
+          if(돈이 부족하면)
+          {
+          NotEnoughGold();
+                return;
+          }
+          */
+
         switch (n)
         {
             case 1:
-                StartCoroutine(ScaleDownCoroutine(buildUI));
+
+                currentTower = Instantiate(tower1[0], spawnPoint.position + Vector3.up, Quaternion.identity);
                 break;
             case 2:
-                StartCoroutine(ScaleDownCoroutine(manageUI));
+                currentTower = Instantiate(tower2[0], spawnPoint.position + Vector3.up, Quaternion.identity);
+                break;
+            case 3:
+                currentTower = Instantiate(tower3[0], spawnPoint.position + Vector3.up, Quaternion.identity);
                 break;
             default:
                 break;
         }
-    }
-    public void BuildTower(GameObject prefab)
-    {
-        currentTower = Instantiate(prefab, spawnPoint.position + Vector3.up, Quaternion.identity);
         //일단 스폰포지션에 1 더하는걸로 했는데 첨부터 스폰포인트를 조정하는게 나을거같은데
         buildUI.SetActive(false);
     }
 
     public void UpgradeTower()
     {
-        // 업그레이드 로직
-        // 업글전 타워파괴 업글후 타워생성
-        Destroy(currentTower);
-        currentTower = Instantiate(testprefab, spawnPoint.position + Vector3.up, Quaternion.identity);//테스트용
-        //currentTower = Instantiate();
-        //다음레벨 타워를 어떻게 가져오지
-        Debug.Log("업그레이드됨");
+        towerLevel++;
+
+        if (towerType == 1 && towerLevel < tower1.Length)
+        {
+            Destroy(currentTower);
+            currentTower = Instantiate(tower1[towerLevel], spawnPoint.position + Vector3.up, Quaternion.identity);
+        }
+        else if (towerType == 2 && towerLevel < tower2.Length)
+        {
+            Destroy(currentTower);
+            currentTower = Instantiate(tower2[towerLevel], spawnPoint.position + Vector3.up, Quaternion.identity);
+        }
+        else if (towerType == 3 && towerLevel < tower3.Length)
+        {
+            Destroy(currentTower);
+            currentTower = Instantiate(tower3[towerLevel], spawnPoint.position + Vector3.up, Quaternion.identity);
+        }
+        else
+        {
+            towerLevel--; // 되돌리기
+            Debug.Log("최대 업그레이드 단계입니다");
+        }
+
         manageUI.SetActive(false);
     }
 
@@ -144,5 +178,31 @@ public class BuildPoint : MonoBehaviour
         Destroy(currentTower);
         currentTower = null;
         manageUI.SetActive(false);
+    }
+
+    public void NotEnoughGold()
+    {
+        goldAlert.SetActive(true);
+        goldAlert.transform.position = Camera.main.WorldToScreenPoint(transform.position);
+        StartCoroutine(UpandFadeOutCoroutine());
+    }
+
+    IEnumerator UpandFadeOutCoroutine()//사실 페이드아웃은 안했어 귀찮아서
+    {
+        float duration = 0.5f;
+        float timer = 0;
+        Vector3 curPos = goldAlert.transform.position;
+        Vector3 laterPos = curPos + new Vector3(0, 100, 0);
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float t = Mathf.Clamp01(timer / duration);
+            goldAlert.transform.position = Vector3.Lerp(curPos, laterPos, t);
+
+            yield return null;
+        }
+
+        goldAlert.SetActive(false);
     }
 }

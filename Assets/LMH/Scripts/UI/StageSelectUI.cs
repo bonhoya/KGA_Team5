@@ -17,6 +17,7 @@ public class StageSelectUI : MonoBehaviour
     {
         settingUIPanel.SetActive(false);
 
+        // 저장된 볼륨 설정을 다른곳에서도 유지할 수 있도록 하는 코드
         if(bgmSlider != null)
         {
             bgmSlider.value = SoundsManager.Instance.bgmVolume;

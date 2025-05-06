@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/LMH/Scenes/TestingStageSelectScreen.unity
     guid: 9fb9a3ce7c610e24180d6a908da02dc0
+  - enabled: 1
+    path: Assets/PSH/Map1.unity
+    guid: 4ddbe94ef788a584db2e27acac625dc8
   m_configObjects: {}

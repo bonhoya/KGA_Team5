@@ -24,31 +24,32 @@ public class BuildPoint : MonoBehaviour
         spawnPoint = transform;
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log($"현재a는{a}입니다");
-            if (EventSystem.current.IsPointerOverGameObject())
-                return;
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-
-            if (!Physics.Raycast(ray, out RaycastHit hit) && a != 0)
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                CloseAllUI();
-                a = 0;
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+
+                if (!Physics.Raycast(ray, out RaycastHit hit) && a != 0)
+                {
+                    CloseAllUI();
+                    a = 0;
+                }
             }
         }
-    }
+    }*/
 
     private void OnMouseDown()
     {
         if (Time.timeScale == 0f)//일시정지때는 작동 안하게
             return;
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
+        //if (EventSystem.current.IsPointerOverGameObject())
+        //    return;
 
         if (currentTower == null)
         {

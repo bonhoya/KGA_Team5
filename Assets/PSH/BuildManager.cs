@@ -8,7 +8,12 @@ public class BuildManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
     }
 
     public void SetCurrentSpot(BuildPoint spot)
@@ -29,5 +34,9 @@ public class BuildManager : MonoBehaviour
     public void RemoveTower()
     {
         currentSpot?.RemoveTower();
+    }
+    public void CloseUI()
+    {
+        currentSpot?.CloseAllUI();
     }
 }

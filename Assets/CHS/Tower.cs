@@ -45,7 +45,7 @@ public abstract class Tower : MonoBehaviour
                     transform.LookAt(lookPos);
                     Attack();
                     return;
-                }1
+                }
                 else
                 {
                

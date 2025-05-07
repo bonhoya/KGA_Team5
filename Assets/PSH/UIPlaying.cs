@@ -44,6 +44,8 @@ public class UIPlaying : MonoBehaviour
 
     private void OnEnable()
     {
+        GameManager.Instance.OnGoldChanged += ChangedGoldUI;
+        GameManager.Instance.OnPlayerLifeChanged += ChangedPlayerHPUI;
         CameraController.OnCameraMoveDone += StartGame;
         StartCoroutine(DelayStartCamera());
         GameManager.Instance.OnPlayerLifeZero += IsFailedStage;
@@ -51,6 +53,8 @@ public class UIPlaying : MonoBehaviour
 
     private void OnDisable()
     {
+        GameManager.Instance.OnGoldChanged -= ChangedGoldUI;
+        GameManager.Instance.OnPlayerLifeChanged -= ChangedPlayerHPUI;
         GameManager.Instance.OnPlayerLifeZero -= IsFailedStage;
     }
     private void StartGame()
@@ -157,6 +161,16 @@ public class UIPlaying : MonoBehaviour
            
         }
 
+    }
+    
+    private void ChangedGoldUI(int gold)
+    {
+        goldText.text = gold.ToString();
+    }
+
+    private void ChangedPlayerHPUI(int health)
+    {
+        healthText.text = health.ToString();
     }
 
     private void IsFailedStage()

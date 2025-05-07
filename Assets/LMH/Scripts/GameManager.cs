@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
 
     // 체력이 0이 되었을 때 발생하는 이벤트
     public event Action OnPlayerLifeZero;
+    // 골드 변화량에 따라 발생하는 이벤트
+    public event Action<int> OnGoldChanged;
+    // 체력 변화량에 따라 발생하는 이벤트
+    public event Action<int> OnPlayerLifeChanged;
+
 
     private void Awake()
     {
@@ -51,6 +56,7 @@ public class GameManager : MonoBehaviour
     public void PlayerTakeDamage(int damage)
     {
         playerLife -= damage;
+        OnPlayerLifeChanged?.Invoke(playerLife);
         SoundsManager.Instance.SFXPlay("Select", TakeDamageClip);
         if (playerLife <= 0)
         {
@@ -66,6 +72,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool SpendGold(int spendGold)
+    {
+        if(gold >= spendGold)
+        {
+            gold -= spendGold;
+            OnGoldChanged?.Invoke(gold);
+            return true;
+        }
+        return false;
+    }
+
+    public void AddGold(int AddGold)
+    {
+        gold += AddGold;
+        OnGoldChanged?.Invoke(gold);
+    }
     
     /// <summary>
     /// 물리, 마법 데미지 계산 공식

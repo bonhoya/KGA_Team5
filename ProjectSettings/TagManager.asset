@@ -3,14 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Path
   - Water
   - UI
+  - Enemy
   - 
   - 
   - 
@@ -24,11 +26,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Stage1
+  - Stage2
+  - Stage3
+  - Stage4
   - 
   - 
   - 

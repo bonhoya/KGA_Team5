@@ -1,6 +1,6 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class BuildPoint : MonoBehaviour
 {
@@ -15,41 +15,48 @@ public class BuildPoint : MonoBehaviour
     //타워별배열
     public GameObject[] tower1;
     public GameObject[] tower2;
-    public GameObject[] tower3;
 
     private int towerType = 0;
     private int towerLevel = 0;
 
+    public int archorTowerPrice = 50;
+    public int magicTowerPrice = 50;
+
+    public TextMeshProUGUI archorTowerPriceText;
+    public TextMeshProUGUI magicTowerPriceText;
     private void Awake()
     {
         spawnPoint = transform;
+
+        archorTowerPriceText.text = archorTowerPrice.ToString();
+        magicTowerPriceText.text = magicTowerPrice.ToString();
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log($"현재a는{a}입니다");
-            if (EventSystem.current.IsPointerOverGameObject())
-                return;
+    /* private void Update()
+     {
+         if (Input.GetMouseButtonDown(0))
+         {
+             Debug.Log($"현재a는{a}입니다");
+             if (EventSystem.current.IsPointerOverGameObject())
+                 return;
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 
-            if (!Physics.Raycast(ray, out RaycastHit hit) && a != 0)
-            {
-                CloseAllUI();
-                a = 0;
-            }
-        }
-    }
-
+             if (!Physics.Raycast(ray, out RaycastHit hit) && a != 0)
+             {
+                 CloseAllUI();
+                 a = 0;
+             }
+         }
+     }
+    */
     private void OnMouseDown()
     {
         if (Time.timeScale == 0f)//일시정지때는 작동 안하게
             return;
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
+        /*if (EventSystem.current.IsPointerOverGameObject())
+            return;*/
 
         if (currentTower == null)
         {
@@ -115,28 +122,33 @@ public class BuildPoint : MonoBehaviour
 
     public void BuildTower(int n)//n에 따라 타워 건설하기
     {
-        towerType = n;
-        towerLevel = 0;
-
         /*
           if(돈이 부족하면)
           {
           NotEnoughGold();
                 return;
           }
-          */
+          */       
 
         switch (n)
         {
             case 1:
-
+                if (GameManager.Instance.gold < archorTowerPrice)//아쳐타워가격
+                {
+                    NotEnoughGold();
+                    return;
+                }
+                GameManager.Instance.gold -= archorTowerPrice;
                 currentTower = Instantiate(tower1[0], spawnPoint.position + Vector3.up, Quaternion.identity);
                 break;
             case 2:
+                if (GameManager.Instance.gold < magicTowerPrice)//매직타워가격
+                {
+                    NotEnoughGold();
+                    return;
+                }
+                GameManager.Instance.gold -= magicTowerPrice;
                 currentTower = Instantiate(tower2[0], spawnPoint.position + Vector3.up, Quaternion.identity);
-                break;
-            case 3:
-                currentTower = Instantiate(tower3[0], spawnPoint.position + Vector3.up, Quaternion.identity);
                 break;
             default:
                 break;
@@ -159,11 +171,6 @@ public class BuildPoint : MonoBehaviour
             Destroy(currentTower);
             currentTower = Instantiate(tower2[towerLevel], spawnPoint.position + Vector3.up, Quaternion.identity);
         }
-        else if (towerType == 3 && towerLevel < tower3.Length)
-        {
-            Destroy(currentTower);
-            currentTower = Instantiate(tower3[towerLevel], spawnPoint.position + Vector3.up, Quaternion.identity);
-        }
         else
         {
             towerLevel--; // 되돌리기
@@ -175,6 +182,8 @@ public class BuildPoint : MonoBehaviour
 
     public void RemoveTower()
     {
+        //GameManager.Instance.gold += currentTower.price * 0.5f;
+        GameManager.Instance.gold += 25;
         Destroy(currentTower);
         currentTower = null;
         manageUI.SetActive(false);

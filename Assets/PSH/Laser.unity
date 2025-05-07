@@ -385,17 +385,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathPoints1:
-  - {fileID: 411278032}
-  - {fileID: 1536657389}
-  - {fileID: 892733869}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   pathPoints2:
-  - {fileID: 411278032}
-  - {fileID: 1536657389}
-  - {fileID: 892733869}
-  - {fileID: 23157273}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   pathPoints3:
-  - {fileID: 36298375}
-  - {fileID: 711557928}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   speed: 50
   length: 0.5
 --- !u!120 &322554429
@@ -1829,10 +1840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1614043412}
   - component: {fileID: 1614043411}
-  - component: {fileID: 1614043410}
   - component: {fileID: 1614043409}
-  - component: {fileID: 1614043408}
-  - component: {fileID: 1614043407}
   - component: {fileID: 1614043406}
   m_Layer: 0
   m_Name: Main Camera (1)
@@ -1857,56 +1865,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
---- !u!114 &1614043407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614043405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bb42831ee5422f409e7f24f9e7488ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stage: 1
-  renderingStrategy: 0
-  renderingMode: 1
-  outlineLayerMask: 32
-  primaryBufferSizeMode: 0
-  primaryRendererScale: 1
-  primarySizeReference: 800
-  blurShift: 2
-  dilateShift: 2
-  dilateIterations: 2
-  dilateQuality: 0
-  blurIterations: 5
-  blurType: 4
---- !u!114 &1614043408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614043405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bb42831ee5422f409e7f24f9e7488ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stage: 1
-  renderingStrategy: 0
-  renderingMode: 1
-  outlineLayerMask: 4
-  primaryBufferSizeMode: 3
-  primaryRendererScale: 1
-  primarySizeReference: 800
-  blurShift: 1
-  dilateShift: 1
-  dilateIterations: 4
-  dilateQuality: 0
-  blurIterations: 1
-  blurType: 1
 --- !u!114 &1614043409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1932,31 +1890,6 @@ MonoBehaviour:
   dilateQuality: 0
   blurIterations: 2
   blurType: 4
---- !u!114 &1614043410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614043405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bb42831ee5422f409e7f24f9e7488ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stage: 1
-  renderingStrategy: 0
-  renderingMode: 1
-  outlineLayerMask: 2
-  primaryBufferSizeMode: 0
-  primaryRendererScale: 1
-  primarySizeReference: 800
-  blurShift: 1
-  dilateShift: 1
-  dilateIterations: 1
-  dilateQuality: 0
-  blurIterations: 1
-  blurType: 3
 --- !u!20 &1614043411
 Camera:
   m_ObjectHideFlags: 0

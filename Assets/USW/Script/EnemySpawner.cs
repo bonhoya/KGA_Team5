@@ -41,12 +41,17 @@ public class EnemySpawner : MonoBehaviour
     private int currentWaveIndex = 0;     // 현재 웨이브 인덱스
     private bool isSpawning = false;      // 웨이브 진행 중 여부
 
+    private UIPlaying _uiPlaying; // uiplaying 참조 변수 
+
     /// <summary>
     /// 게임 오브젝트가 생성될 때 풀 딕셔너리 초기화
     /// </summary>
     void Awake()
     {
         InitializePools();
+        
+        //ui playing 인스턴스 일어나자마자 찾아버리기 
+        _uiPlaying = FindObjectOfType<UIPlaying>();
     }
 
     /// <summary>
@@ -153,6 +158,8 @@ public class EnemySpawner : MonoBehaviour
             while (isSpawning) yield return null; // 이미 스폰 중이면 대기
 
             Wave currentWave = waves[currentWaveIndex];
+            
+       
             yield return StartCoroutine(SpawnWave(currentWave)); // 웨이브 스폰
             currentWaveIndex++;
 

@@ -38,7 +38,14 @@ public class Orc : Enemy
     
     // 분노 상태 목표 속도 저장
     private float enragedSpeed = 0f; 
-
+    
+    private Animator animator;
+    
+    //죽은거 확인용도
+    private bool isDead = false;
+        
+    // 포탑 확인용도
+    public bool IsDead => isDead;
     
     public override void InitializeStats()
     {
@@ -59,10 +66,22 @@ public class Orc : Enemy
         baseSpeed = moveSpeed; 
 
         
+        //애니메이터 초기화
+        animator = GetComponentInChildren<Animator>();
+        
+        if (animator != null)
+        {
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isDead", false);
+        }
+
         if (agent != null)
         {
             agent.speed = moveSpeed;
         }
+
+       
     }
 
 
@@ -70,14 +89,16 @@ public class Orc : Enemy
     protected override void Update()
     {
         base.Update();
+      
 
         // 분노 상태 체크 체력이 일정 수준 이하로 떨어지면 분노 상태 돌입
         if (!isEnraged && !hadEnraged && currentHealth <= maxHealth * enrageThreshold)
         {
             StartEnrage(); 
         }
-
-
+        
+        UpdateAnimationStates();
+        
         // 타이머로 스타트해주고 
         if (isEnraging)
         {
@@ -98,9 +119,6 @@ public class Orc : Enemy
             }
         }
 
-
-
-
         if (isCalming)
         {
             calmTimer += Time.deltaTime;
@@ -118,6 +136,41 @@ public class Orc : Enemy
             }
         }
 
+    }
+
+    private void UpdateAnimationStates()
+    {
+        if (animator == null) return;
+
+        bool isWalking = agent != null && agent.enabled && !agent.pathPending && agent.velocity.magnitude > 0.1f;
+        
+        animator.SetBool("isRunning",isEnraging && isWalking);
+        animator.SetBool("isWalking",isWalking&& !isEnraging);
+    }
+    protected override void Die()
+    {
+        
+        isDead = true;
+        if (agent != null)
+        {
+            agent.enabled = false;
+        }
+
+        if (animator != null)
+        {
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isDead", true);
+        }
+        
+
+        Invoke("TriggerOnDeath",2.0f);
+    }
+
+    private void TriggerOnDeath()
+    {
+        base.OnDeath();
+        gameObject.SetActive(false);
     }
 
     // 기본 물리계산

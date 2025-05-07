@@ -8,6 +8,10 @@ public class EnergyBallPool : MonoBehaviour
 
     [SerializeField] private GameObject prefab;
     [SerializeField] private int poolSize = 10;
+    [SerializeField] private float projectileSpeed;
+
+    public float ProjectileSpeed => projectileSpeed;
+
 
     private Queue<GameObject> pool = new Queue<GameObject>();
 

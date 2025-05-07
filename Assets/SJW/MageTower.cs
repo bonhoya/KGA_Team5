@@ -25,18 +25,27 @@ public class MageTower : Tower
     {
         if (Time.time < nextAttackTime) return;
 
+        if (currentTarget == null) return;
+
         GameObject energyBall = EnergyBallPool.Instance.GetFromPool();
         if (energyBall == null) return;
 
         energyBall.transform.position = firePoint.position;
         energyBall.transform.rotation = Quaternion.identity;
 
-        // 다음 공격 가능 시간 계산 (1초 / 초당 공격 횟수)
-        if (attackSpeed > 0f)
-            nextAttackTime = Time.time + (1f / attackSpeed);
-        else
-            nextAttackTime = Time.time + 1f; // 혹시 0일 경우 대비
+        // 방향 계산
+        Vector3 direction = (currentTarget.position - firePoint.position).normalized;
+
+        Rigidbody rb = energyBall.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            float projectileSpeed = EnergyBallPool.Instance.ProjectileSpeed;
+            rb.velocity = direction * projectileSpeed;
+        }
+
+        nextAttackTime = Time.time + (1f / attackSpeed);
     }
+
 
     protected override void Upgrade()
     {

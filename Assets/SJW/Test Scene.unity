@@ -301,7 +301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPower: 5
   range: 10
-  attackSpeed: 2
+  attackSpeed: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -370,6 +370,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 522bdedc428f3834fa5b115350323c9f, type: 3}
+--- !u!1001 &424412360
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4814878465038588115, guid: 447bfe726b6341c49bc1646a2a1b954a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.509373
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814878465038588115, guid: 447bfe726b6341c49bc1646a2a1b954a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814878465038588115, guid: 447bfe726b6341c49bc1646a2a1b954a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.8107986
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814878465038588115, guid: 447bfe726b6341c49bc1646a2a1b954a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814878465038588115, guid: 447bfe726b6341c49bc1646a2a1b954a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814878465038588115, guid: 447bfe726b6341c49bc1646a2a1b954a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814878465038588115, guid: 447bfe726b6341c49bc1646a2a1b954a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814878465038588115, guid: 447bfe726b6341c49bc1646a2a1b954a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814878465038588115, guid: 447bfe726b6341c49bc1646a2a1b954a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4814878465038588115, guid: 447bfe726b6341c49bc1646a2a1b954a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6063896704278510166, guid: 447bfe726b6341c49bc1646a2a1b954a, type: 3}
+      propertyPath: m_Name
+      value: EnergyBall
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 447bfe726b6341c49bc1646a2a1b954a, type: 3}
 --- !u!4 &457200922 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1846470722354255606, guid: 522bdedc428f3834fa5b115350323c9f, type: 3}
@@ -478,6 +535,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 6063896704278510166, guid: 447bfe726b6341c49bc1646a2a1b954a, type: 3}
   poolSize: 10
+  projectileSpeed: 20
 --- !u!1 &1151923285
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,3 +936,4 @@ SceneRoots:
   - {fileID: 175533607}
   - {fileID: 67826226}
   - {fileID: 1057312922}
+  - {fileID: 424412360}

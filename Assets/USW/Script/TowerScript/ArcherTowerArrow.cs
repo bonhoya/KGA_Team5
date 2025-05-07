@@ -53,6 +53,7 @@ public class ArcherTowerArrow : MonoBehaviour
         {
             Vector3 direction = (target.position - transform.position).normalized;
             arrowRb.velocity = direction * arrowSpeed;
+            transform.LookAt(target);
             
             
             // 임펄스를 여기에다가 안줘도 되나 ? 아니지 어쩌피 초기설정이니깐 ? 

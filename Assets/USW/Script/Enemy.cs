@@ -32,6 +32,13 @@ public class Enemy : MonoBehaviour
     public float magicResistance = 0f;
     public float moveSpeed = 0f;
     public Vector3 offset;
+    
+    //죽은거 확인용도
+    private bool isDead = false;
+        
+    // 포탑 확인용도
+    public bool IsDead => isDead;
+        
     /// <summary>
     /// 네비
     /// </summary>
@@ -218,6 +225,7 @@ public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> 
     /// </summary>
     protected virtual void Die()
     {
+        isDead = true;
         // NavMeshAgent 비활성화
         agent.enabled = false;
         
@@ -229,4 +237,5 @@ public virtual void Initialize(Vector3 spawnPos, Transform end, List<Transform> 
     {
         onDeath?.Invoke(gameObject);
     }
+    
 }

@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
     public void PlayerTakeDamage(int damage)
     {
         playerLife -= damage;
-        SoundsManager.Instance.SFXPlay("Select", TakeDamageClip);
         if (playerLife <= 0)
         {
             // 플레이어의 체력이 0이 되면 게임오버가 진행되고

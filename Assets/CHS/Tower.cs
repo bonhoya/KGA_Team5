@@ -30,49 +30,62 @@ public abstract class Tower : MonoBehaviour
         FindEnemy();
     }
 
-    protected virtual void FindEnemy()
+   protected virtual void FindEnemy()
     {
-        if (currentTarget != null && currentTarget.gameObject.activeInHierarchy)
+        // 현재 타겟이 있는지 확인
+        if (currentTarget != null)
         {
-            float distance = Vector3.Distance(transform.position, currentTarget.position);
-            if (distance <= range)
+            Enemy enemy = currentTarget.GetComponent<Enemy>();
+            if (enemy != null && enemy.currentHealth > 0)
             {
-                Vector3 lookPos = new Vector3(currentTarget.position.x, transform.position.y, currentTarget.position.z);
-                transform.LookAt(lookPos);
-                Attack();
-                return;
+                float distance = Vector3.Distance(transform.position, currentTarget.position);
+                if (distance <= range)
+                {
+                    Vector3 lookPos = new Vector3(currentTarget.position.x, transform.position.y, currentTarget.position.z);
+                    transform.LookAt(lookPos);
+                    Attack();
+                    return;
+                }1
+                else
+                {
+               
+                    currentTarget = null; 
+                }
             }
             else
             {
                 currentTarget = null;
             }
         }
-    
-        // 가장 가까운 적을 찾기 위해 거리 비교
-        Collider[] hits = Physics.OverlapSphere(transform.position, range, enemyLayer);
-        float minDistance = float.MaxValue;
-        Transform closestEnemy = null;
 
-        foreach (var hit in hits)
+        // currentTarget이 null이면 새로운 적을 찾기
+        if (currentTarget == null)
         {
-            if (hit.gameObject.layer == 6 && hit.gameObject.activeInHierarchy)
+            Collider[] hits = Physics.OverlapSphere(transform.position, range, enemyLayer);
+            float minDistance = float.MaxValue;
+            Transform closestEnemy = null;
+
+            foreach (var hit in hits)
             {
-                float distance = Vector3.Distance(transform.position, hit.transform.position);
-                if (distance < minDistance)
+                Enemy enemy = hit.GetComponent<Enemy>();
+                if (enemy != null && enemy.currentHealth > 0)
                 {
-                    minDistance = distance;
-                    closestEnemy = hit.transform;
+                    float distance = Vector3.Distance(transform.position, hit.transform.position);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        closestEnemy = hit.transform;
+                    }
                 }
             }
-        }
 
-        currentTarget = closestEnemy;
-
-        if (currentTarget != null)
-        {
-            Vector3 lookPos = new Vector3(currentTarget.position.x, transform.position.y, currentTarget.position.z);
-            transform.LookAt(lookPos);
-            Attack();
+            if (closestEnemy != null)
+            {
+                currentTarget = closestEnemy;
+                Vector3 lookPos = new Vector3(currentTarget.position.x, transform.position.y, currentTarget.position.z);
+                transform.LookAt(lookPos);
+                Attack();
+            }
         }
     }
 

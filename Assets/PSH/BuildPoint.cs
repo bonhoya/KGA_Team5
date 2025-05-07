@@ -15,7 +15,6 @@ public class BuildPoint : MonoBehaviour
     //타워별배열
     public GameObject[] tower1;
     public GameObject[] tower2;
-    public GameObject[] tower3;
 
     private int towerType = 0;
     private int towerLevel = 0;
@@ -25,31 +24,32 @@ public class BuildPoint : MonoBehaviour
         spawnPoint = transform;
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log($"현재a는{a}입니다");
-            if (EventSystem.current.IsPointerOverGameObject())
-                return;
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-
-            if (!Physics.Raycast(ray, out RaycastHit hit) && a != 0)
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                CloseAllUI();
-                a = 0;
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+
+                if (!Physics.Raycast(ray, out RaycastHit hit) && a != 0)
+                {
+                    CloseAllUI();
+                    a = 0;
+                }
             }
         }
-    }
+    }*/
 
     private void OnMouseDown()
     {
         if (Time.timeScale == 0f)//일시정지때는 작동 안하게
             return;
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
+        //if (EventSystem.current.IsPointerOverGameObject())
+        //    return;
 
         if (currentTower == null)
         {
@@ -118,29 +118,38 @@ public class BuildPoint : MonoBehaviour
         towerType = n;
         towerLevel = 0;
 
-        /*
-          if(돈이 부족하면)
-          {
-          NotEnoughGold();
-                return;
-          }
-          */
 
-        switch (n)
+        if (n == 1)
         {
-            case 1:
-
-                currentTower = Instantiate(tower1[0], spawnPoint.position + Vector3.up, Quaternion.identity);
-                break;
-            case 2:
-                currentTower = Instantiate(tower2[0], spawnPoint.position + Vector3.up, Quaternion.identity);
-                break;
-            case 3:
-                currentTower = Instantiate(tower3[0], spawnPoint.position + Vector3.up, Quaternion.identity);
-                break;
-            default:
-                break;
+            if (!GameManager.Instance.SpendGold(30))
+            {
+                NotEnoughGold();
+                return;
+            }
         }
+
+        else if(n == 2)
+        {
+            if (!GameManager.Instance.SpendGold(40))
+            {
+                NotEnoughGold();
+                return;
+            }
+        }
+
+
+            switch (n)
+            {
+                case 1:
+
+                    currentTower = Instantiate(tower1[0], spawnPoint.position + Vector3.up, Quaternion.identity);
+                    break;
+                case 2:
+                    currentTower = Instantiate(tower2[0], spawnPoint.position + Vector3.up, Quaternion.identity);
+                    break;
+                default:
+                    break;
+            }
         //일단 스폰포지션에 1 더하는걸로 했는데 첨부터 스폰포인트를 조정하는게 나을거같은데
         buildUI.SetActive(false);
     }
@@ -159,11 +168,6 @@ public class BuildPoint : MonoBehaviour
             Destroy(currentTower);
             currentTower = Instantiate(tower2[towerLevel], spawnPoint.position + Vector3.up, Quaternion.identity);
         }
-        else if (towerType == 3 && towerLevel < tower3.Length)
-        {
-            Destroy(currentTower);
-            currentTower = Instantiate(tower3[towerLevel], spawnPoint.position + Vector3.up, Quaternion.identity);
-        }
         else
         {
             towerLevel--; // 되돌리기
@@ -177,7 +181,17 @@ public class BuildPoint : MonoBehaviour
     {
         Destroy(currentTower);
         currentTower = null;
-        manageUI.SetActive(false);
+
+        if(towerType == 1)
+        {
+            GameManager.Instance.AddGold(20);
+        }
+        else if(towerType == 2)
+        {
+            GameManager.Instance.AddGold(30);
+        }
+
+            manageUI.SetActive(false);
     }
 
     public void NotEnoughGold()

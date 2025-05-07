@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MagicBolt : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float speed = 20f;
     [SerializeField] private Transform target;
     [SerializeField] private float damage;
 

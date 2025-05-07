@@ -2570,6 +2570,7 @@ GameObject:
   - component: {fileID: 3201647203946948109}
   - component: {fileID: 356814270849688256}
   - component: {fileID: 15444993184600102}
+  - component: {fileID: -2226353823137927910}
   m_Layer: 6
   m_Name: TutorialBoss
   m_TagString: Untagged
@@ -2660,4 +2661,27 @@ MonoBehaviour:
   moveSpeed: 0
   offset: {x: 0, y: 0, z: 0}
   agent: {fileID: 0}
-  deathEffect: {fileID: 3155651565593572881, guid: c3cb3a145c1838449a5c6ec05e403152, type: 3}
+  deathEffect: {fileID: 8997578613406886108, guid: a71c580932ac69b4cb6aebc571f9b164, type: 3}
+--- !u!136 &-2226353823137927910
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9085773717613186765}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

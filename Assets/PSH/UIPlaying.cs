@@ -135,11 +135,11 @@ public class UIPlaying : MonoBehaviour
     {
         SoundsManager.Instance.SFXPlay("Select", StartStageClip);
         WaveBtn.gameObject.SetActive(false);
-        waveLine.HidePath();
         isWave = true;
         currentWave = currentWave + 1;
         waveText.text = "WAVE : " + currentWave.ToString() + "/ 5";//5�� �� ���̺� ������ �ٲܰ�
     }
+    
     void GameCleared()
     {
         if (currentWave > 5)// ���� Ŭ����������

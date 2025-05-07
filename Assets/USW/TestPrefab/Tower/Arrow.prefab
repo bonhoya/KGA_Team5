@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2c658c01fca0a48a16bc5a5961e9df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrowSpeed: 223.7
+  arrowSpeed: 20
   target: {fileID: 0}
   damage: 0
   enemyLayer:

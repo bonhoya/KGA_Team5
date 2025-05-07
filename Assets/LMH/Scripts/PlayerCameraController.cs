@@ -32,7 +32,7 @@ public class PlayerCameraController : MonoBehaviour
         if (hitTarget == "Stage4")
         {
             SoundsManager.Instance.SFXPlay("Select", SelectStageClip);
-            SceneChangeManager.Instance.ChangeScene("TestBossScene");
+            SceneChangeManager.Instance.ChangeScene("TestBossScene 1");
         }
     }
 

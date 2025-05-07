@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/PSH/Map1.unity
     guid: 4ddbe94ef788a584db2e27acac625dc8
   - enabled: 1
-    path: Assets/USW/TestScene/TestBossScene.unity
-    guid: 15470b26096f8ce4c815d0a71e5b6047
+    path: Assets/USW/TestScene/TestBossScene 1.unity
+    guid: cefa38227784d8a40943c5d599a2cd5e
   m_configObjects: {}

@@ -104,7 +104,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   currentTarget: {fileID: 0}
-  projectilePrefab: {fileID: 1517048917445915103, guid: 3794bbd886800fd4fa03d08a592cad38, type: 3}
+  projectilePrefab: {fileID: 5179973347258860348, guid: b13bd02b24501fd44893a67ec2f9921c, type: 3}
   firePoint: {fileID: 3478260464416570685}
   attackTimer: 0
 --- !u!1 &4469053435234152971

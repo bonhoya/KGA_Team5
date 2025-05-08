@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
 
             OnPlayerLifeZero?.Invoke();
 
+            playerLife = 20;
+
         }
     }
 

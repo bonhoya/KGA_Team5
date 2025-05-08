@@ -15,8 +15,8 @@ public class WaveLine : MonoBehaviour
     [Range(0, 5)][SerializeField] private int yPos = 0;
     private void Start()
     {
-        // ¼± ±×¸± Æ÷ÀÎÆ® ¼³Á¤ ÀÌ°Å ÄÚµå ÇÏ³ª·Î ÅüÄ¥·Á¸é À½
-        // ½ºÅ×ÀÌÁö´ç ¿şÀÌºêÆ÷ÀÎÆ® 2°³ÀÓ 1½ºÅ×ÀÌÁö = 01, 2½ºÅ×ÀÌÁö = 23 ...
+        // ì„  ê·¸ë¦´ í¬ì¸íŠ¸ ì„¤ì • ì´ê±° ì½”ë“œ í•˜ë‚˜ë¡œ í‰ì¹ ë ¤ë©´ ìŒ
+        // ìŠ¤í…Œì´ì§€ë‹¹ ì›¨ì´ë¸Œí¬ì¸íŠ¸ 2ê°œì„ 1ìŠ¤í…Œì´ì§€ = 01, 2ìŠ¤í…Œì´ì§€ = 23 ...
         points0 = new Vector3[]
         {
             new Vector3(0, yPos, 0-30),
@@ -68,7 +68,7 @@ public class WaveLine : MonoBehaviour
         paths.Add(points4);
         paths.Add(points5);
     }
-    public void DrawPath(int stagenum, int n)//stagenumÀº 1ºÎÅÍ nÀº 1¶Ç´Â 2
+    public void DrawPath(int stagenum, int n)//stagenumì€ 1ë¶€í„° nì€ 1ë˜ëŠ” 2
     {
         lineRenderer.startColor = Color.blue;
         lineRenderer.endColor = Color.red;

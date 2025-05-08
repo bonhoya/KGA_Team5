@@ -69485,7 +69485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1661410239}
   cameraMoveSpeed: 0
-  cameraMouseMoveSpeed: 0.01
+  cameraMouseMoveSpeed: 0
   cameraZoomInLimit: 15
   cameraZoomOutLimit: 45
   SelectStageClip: {fileID: 0}

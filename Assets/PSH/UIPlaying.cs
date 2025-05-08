@@ -224,12 +224,16 @@ public class UIPlaying : MonoBehaviour
         GameManager.Instance.isStageStarted = false;
         CameraController.OnCameraMoveDone -= StartGame;
         SceneChangeManager.Instance.RestartScene();
+        GameManager.Instance.playerLife = 20;
+        GameManager.Instance.gold = 1000;
     }
 
     public void QuitClick()
     {
         SoundsManager.Instance.SFXPlay("Select", SelectMenuClip);
         SceneChangeManager.Instance.ChangeScene("TestingStageSelectScreen");
+        GameManager.Instance.playerLife = 20;
+        GameManager.Instance.gold = 1000;
     }
 
     public void NextClick()

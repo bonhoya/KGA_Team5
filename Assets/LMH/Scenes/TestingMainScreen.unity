@@ -5236,7 +5236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLife: 20
-  gold: 100
+  gold: 1000
   isGameOver: 0
   isClearedStageOne: 0
   isClearedStageTwo: 0

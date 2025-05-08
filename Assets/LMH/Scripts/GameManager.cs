@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public int playerLife = 20;
-    public int gold = 100;
+    public int gold = 1000;
 
     [Header("GameState")]
     [SerializeField] public bool isGameOver;
@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
             OnPlayerLifeZero?.Invoke();
 
             playerLife = 20;
+            gold = 1000;
 
         }
     }

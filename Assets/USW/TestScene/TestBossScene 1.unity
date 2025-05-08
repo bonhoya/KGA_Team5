@@ -22200,7 +22200,7 @@ MonoBehaviour:
   manageUI: {fileID: 118273787}
   goldAlert: {fileID: 1705904276}
   tower1:
-  - {fileID: 750088156487450070, guid: 69a37c490d8259e4184cccdd77d517fd, type: 3}
+  - {fileID: 7399885629517394640, guid: 28c66a2f8c3ccf84e806208815633576, type: 3}
   tower2:
   - {fileID: 2890067537683763737, guid: 7f8aa7f4f8973264eaa555ca94d101be, type: 3}
 --- !u!4 &635624054 stripped
@@ -28560,7 +28560,7 @@ MonoBehaviour:
   manageUI: {fileID: 118273787}
   goldAlert: {fileID: 1705904276}
   tower1:
-  - {fileID: 750088156487450070, guid: 69a37c490d8259e4184cccdd77d517fd, type: 3}
+  - {fileID: 7399885629517394640, guid: 28c66a2f8c3ccf84e806208815633576, type: 3}
   tower2:
   - {fileID: 2890067537683763737, guid: 7f8aa7f4f8973264eaa555ca94d101be, type: 3}
 --- !u!1001 &710845746
@@ -34495,7 +34495,7 @@ MonoBehaviour:
   manageUI: {fileID: 118273787}
   goldAlert: {fileID: 1705904276}
   tower1:
-  - {fileID: 750088156487450070, guid: 69a37c490d8259e4184cccdd77d517fd, type: 3}
+  - {fileID: 7399885629517394640, guid: 28c66a2f8c3ccf84e806208815633576, type: 3}
   tower2:
   - {fileID: 2890067537683763737, guid: 7f8aa7f4f8973264eaa555ca94d101be, type: 3}
 --- !u!4 &815491067 stripped
@@ -40285,7 +40285,7 @@ MonoBehaviour:
   manageUI: {fileID: 118273787}
   goldAlert: {fileID: 1705904276}
   tower1:
-  - {fileID: 750088156487450070, guid: 69a37c490d8259e4184cccdd77d517fd, type: 3}
+  - {fileID: 7399885629517394640, guid: 28c66a2f8c3ccf84e806208815633576, type: 3}
   tower2:
   - {fileID: 2890067537683763737, guid: 7f8aa7f4f8973264eaa555ca94d101be, type: 3}
 --- !u!1001 &905344453
@@ -65011,7 +65011,7 @@ MonoBehaviour:
   manageUI: {fileID: 118273787}
   goldAlert: {fileID: 1705904276}
   tower1:
-  - {fileID: 750088156487450070, guid: 69a37c490d8259e4184cccdd77d517fd, type: 3}
+  - {fileID: 7399885629517394640, guid: 28c66a2f8c3ccf84e806208815633576, type: 3}
   tower2:
   - {fileID: 2890067537683763737, guid: 7f8aa7f4f8973264eaa555ca94d101be, type: 3}
 --- !u!1 &1338030573
@@ -68588,7 +68588,7 @@ MonoBehaviour:
   manageUI: {fileID: 118273787}
   goldAlert: {fileID: 1705904276}
   tower1:
-  - {fileID: 750088156487450070, guid: 69a37c490d8259e4184cccdd77d517fd, type: 3}
+  - {fileID: 7399885629517394640, guid: 28c66a2f8c3ccf84e806208815633576, type: 3}
   tower2:
   - {fileID: 2890067537683763737, guid: 7f8aa7f4f8973264eaa555ca94d101be, type: 3}
 --- !u!1001 &1623311866
@@ -71945,7 +71945,7 @@ MonoBehaviour:
   manageUI: {fileID: 118273787}
   goldAlert: {fileID: 1705904276}
   tower1:
-  - {fileID: 750088156487450070, guid: 69a37c490d8259e4184cccdd77d517fd, type: 3}
+  - {fileID: 7399885629517394640, guid: 28c66a2f8c3ccf84e806208815633576, type: 3}
   tower2:
   - {fileID: 2890067537683763737, guid: 7f8aa7f4f8973264eaa555ca94d101be, type: 3}
 --- !u!1 &1886100830
@@ -72563,7 +72563,7 @@ MonoBehaviour:
   manageUI: {fileID: 118273787}
   goldAlert: {fileID: 1705904276}
   tower1:
-  - {fileID: 750088156487450070, guid: 69a37c490d8259e4184cccdd77d517fd, type: 3}
+  - {fileID: 7399885629517394640, guid: 28c66a2f8c3ccf84e806208815633576, type: 3}
   tower2:
   - {fileID: 2890067537683763737, guid: 7f8aa7f4f8973264eaa555ca94d101be, type: 3}
 --- !u!4 &1931446845 stripped

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Accessibility;
-// »ç¿îµå¸¦ »ç¿ëÇÒ ³×ÀÓ½ºÆäÀÌ½º ¼±¾ğ ±¸¹®
+// ì‚¬ìš´ë“œë¥¼ ì‚¬ìš©í•  ë„¤ì„ìŠ¤í˜ì´ìŠ¤ ì„ ì–¸ êµ¬ë¬¸
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -33,7 +33,7 @@ public class SoundsManager : MonoBehaviour
         }
     }
 
-    // ±âº»ÀûÀ¸·Î Ãâ·ÂÇÏ´Â ¹è°æÀ½¾Ç
+    // ê¸°ë³¸ì ìœ¼ë¡œ ì¶œë ¥í•˜ëŠ” ë°°ê²½ìŒì•…
     public void backGroundMusicPlay(AudioClip cilp)
     {
         bgm.outputAudioMixerGroup = audioMixer.FindMatchingGroups("BGM")[0];
@@ -54,7 +54,7 @@ public class SoundsManager : MonoBehaviour
 
     }
 
-    // ¾À¿¡ ÀÇÇØ º¯°æµÇ´Â ¹è°æÀ½¾Ç
+    // ì”¬ì— ì˜í•´ ë³€ê²½ë˜ëŠ” ë°°ê²½ìŒì•…
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         for(int i = 0; i < bgmlist.Length; i++)
@@ -66,14 +66,14 @@ public class SoundsManager : MonoBehaviour
         }
     }
 
-    // »ç¿ëÇÏ±â ÆíÇÏ±â À§ÇÏ¿© ³²°Ü³õÀ½.
-    // UI¿Í ¿¬°áµÇ´Â ¹è°æÀ½¾Ç ÄÁÆ®·Ñ·¯
+    // ì‚¬ìš©í•˜ê¸° í¸í•˜ê¸° ìœ„í•˜ì—¬ ë‚¨ê²¨ë†“ìŒ.
+    // UIì™€ ì—°ê²°ë˜ëŠ” ë°°ê²½ìŒì•… ì»¨íŠ¸ë¡¤ëŸ¬
     /*public void BGMController(float value)
     {
         audioMixer.SetFloat("BGMParam", Mathf.Log10(value) * 20);
     }*/
 
-    // UI¿Í ¿¬°áµÇ´Â È¿°úÀ½ ÄÁÆ®·Ñ·¯
+    // UIì™€ ì—°ê²°ë˜ëŠ” íš¨ê³¼ìŒ ì»¨íŠ¸ë¡¤ëŸ¬
     /*public void SFXController(float value)
     {
         audioMixer.SetFloat("SFXParam", Mathf.Log10(value) * 20);

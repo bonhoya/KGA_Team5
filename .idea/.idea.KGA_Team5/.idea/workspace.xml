@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1dbd134-5623-47e8-961b-1b2f29ec8499" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/USW/Script/TowerScript/ArcherTowerArrow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/USW/Script/TowerScript/ArcherTowerArrow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/USW/TestPrefab/Tower/Arrow.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/USW/TestPrefab/Tower/Arrow.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/USW/TestPrefab/Tower/TB_ArcherTower_Lvl1.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/USW/TestPrefab/Tower/TB_ArcherTower_Lvl1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KGA_Team5/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KGA_Team5/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LMH/Scripts/SoundsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/LMH/Scripts/SoundsManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PSH/WaveLine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PSH/WaveLine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/USW/TestPrefab/Tower/ArcherTower.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/USW/TestPrefab/Tower/ArcherTower.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/USW/TestScene/TestBossScene 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/USW/TestScene/TestBossScene 1.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,6 +118,10 @@
       <workItem from="1746365380658" duration="1458000" />
       <workItem from="1746510192406" duration="7269000" />
       <workItem from="1746578202909" duration="18280000" />
+      <workItem from="1746609227575" duration="1359000" />
+      <workItem from="1746664354166" duration="1380000" />
+      <workItem from="1746684928351" duration="168000" />
+      <workItem from="1746685777234" duration="599000" />
     </task>
     <servers />
   </component>

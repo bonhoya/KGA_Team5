@@ -35,7 +35,7 @@ public class MageTower : Tower
                 MagicBolt magicBolt = projectile.GetComponent<MagicBolt>();
                 if (magicBolt != null)
                 {
-                    magicBolt.Init(currentTarget, 20f, damage);
+                    magicBolt.Init(currentTarget, 5f, damage);
                 }
                 attackTimer = 0f;
             }

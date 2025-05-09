@@ -13,7 +13,7 @@ public class ArcherTower : Tower
 
     private void Start()
     {
-        attackPower = 10f;
+        attackPower = 5f;
         range = 10f;
         attackSpeed = 10f;
     }
